@@ -15,6 +15,7 @@ import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RootStoreModule } from './@stores/root-store.module';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
     ShellModule,
     HomeModule,
     AuthModule,
-    AppRoutingModule, // must be imported as the last module as it contains the fallback route
+    AppRoutingModule,
+    RootStoreModule, // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],
   providers: [],
