@@ -16,6 +16,10 @@ import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RootStoreModule } from './@stores/root-store.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { metaReducers } from '@app/@stores/reducer';
+import { PositionStoreModule } from './@store/position-store/position-store.module';
 
 @NgModule({
   imports: [
@@ -32,7 +36,9 @@ import { RootStoreModule } from './@stores/root-store.module';
     HomeModule,
     AuthModule,
     AppRoutingModule,
-    RootStoreModule, // must be imported as the last module as it contains the fallback route
+    StoreModule.forRoot({}, {metaReducers}),
+    EffectsModule.forRoot([]),
+    RootStoreModule,
   ],
   declarations: [AppComponent],
   providers: [],

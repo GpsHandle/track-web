@@ -1,0 +1,16 @@
+import { State } from './state';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { authFeatureKey } from './reducer';
+
+const getError = (state: State) => state.error;
+const getLoading = (state: State) => state.loading;
+const getUser = (state: State) => state?.user;
+
+export const __state__ = createFeatureSelector(authFeatureKey);
+
+export const selectError = createSelector(__state__, getError);
+export const selectLoading = createSelector(__state__, getLoading);
+export const selectUser = createSelector(__state__, getUser);
+
+export const selectAuth = createSelector(
+  selectError, selectLoading, selectUser, (error, loading, user) => ({error, loading, user}))
