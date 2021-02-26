@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { featureKey, reducer } from '@app/@stores/command-store/reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { Effects } from '@app/@stores/command-store/effects';
 
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
-  ]
+    StoreModule.forFeature(featureKey, reducer),
+    EffectsModule.forFeature([Effects])  ]
 })
 export class CommandStoreModule { }

@@ -17,11 +17,7 @@ export class AuthenticationGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.rootFacade.authState$.pipe(
       map(user => {
-        if (user.id) {
-          return true;
-        } else {
-          return false;
-        }
+        return !!user.id;
       }),
       catchError((err) => {
         log.debug('Not authenticated, redirecting and adding redirect url...');

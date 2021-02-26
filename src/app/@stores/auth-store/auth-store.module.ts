@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { authFeatureKey, reducer } from '@app/@stores/auth-store/reducer';
+import { featureKey, reducer } from '@app/@stores/auth-store/reducer';
 import { Effects } from '@app/@stores/auth-store/effects';
 
 
@@ -10,7 +9,7 @@ import { Effects } from '@app/@stores/auth-store/effects';
 @NgModule({
   declarations: [],
   imports: [
-    StoreModule.forFeature(authFeatureKey, reducer),
+    StoreModule.forFeature(featureKey, reducer),
     EffectsModule.forFeature([Effects])
 
   ]

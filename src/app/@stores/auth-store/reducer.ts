@@ -7,7 +7,7 @@ import {
   logoutRequestAction, logoutSuccessAction
 } from '@app/@stores/auth-store/actions';
 
-export const authFeatureKey = 'auth';
+export const featureKey = 'auth';
 
 export const authReducer = createReducer(
   initialState,

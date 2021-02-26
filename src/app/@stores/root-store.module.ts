@@ -18,6 +18,9 @@ import { ServerStoreModule } from './server-store/server-store.module';
 import { SessionStoreModule } from './session-store/session-store.module';
 import { StatisticStoreModule } from './statistic-store/statistic-store.module';
 import { UserStoreModule } from './user-store/user-store.module';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers } from '@app/@stores/reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 
 
@@ -41,7 +44,10 @@ import { UserStoreModule } from './user-store/user-store.module';
     ServerStoreModule,
     SessionStoreModule,
     StatisticStoreModule,
-    UserStoreModule
+    UserStoreModule,
+    StoreModule.forRoot({}, {metaReducers}),
+    EffectsModule.forRoot([]),
+
   ]
 })
 export class RootStoreModule { }
