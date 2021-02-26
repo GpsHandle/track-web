@@ -9,14 +9,14 @@ corporate proxy.
 
 In Windows environments, add the `HTTP_PROXY` and `HTTPS_PROXY` system environment variable, with these values:
 
-- HTTP_PROXY: `http://<username>:<password>@<proxy_server>:<proxy_port>`
+- HTTP_PROXY: `http://<name>:<password>@<proxy_server>:<proxy_port>`
 - HTTPS_PROXY: `%HTTP_PROXY%`
 
 ### Unix
 
 Add these lines to your `~/.bash_profile` or `~/.profile`:
 ```sh
-export HTTP_PROXY="http://<username>:<password>@<proxy_server>:<proxy_port>"
+export HTTP_PROXY="http://<name>:<password>@<proxy_server>:<proxy_port>"
 export HTTPS_PROXY="$HTTP_PROXY"
 ```
 

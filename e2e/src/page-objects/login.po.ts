@@ -6,7 +6,7 @@
 import { browser, element, by } from 'protractor';
 
 export class LoginPage {
-  usernameField = element(by.css('input[formControlName="username"]'));
+  usernameField = element(by.css('input[formControlName="name"]'));
   passwordField = element(by.css('input[formControlName="password"]'));
   loginButton = element(by.css('button[type="submit"]'));
 

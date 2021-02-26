@@ -19,7 +19,6 @@ import { RootStoreModule } from './@stores/root-store.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { metaReducers } from '@app/@stores/reducer';
-import { PositionStoreModule } from './@store/position-store/position-store.module';
 
 @NgModule({
   imports: [

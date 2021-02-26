@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { Logger, untilDestroyed } from '@core';
-import { AuthenticationService, LoginContext } from './authentication.service';
 import { RootFacade } from '@app/@stores/root.facade';
 
 const log = new Logger('Login');
@@ -25,8 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private facade: RootFacade,
-    private authenticationService: AuthenticationService
+    private facade: RootFacade
   ) {
     this.createForm();
   }
@@ -37,28 +34,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     const userModel: {username: string, password: string, remember: boolean} = this.loginForm.value;
-    console.log('userModel', userModel);
     this.facade.loginRequest(userModel.username, userModel.password, userModel.remember);
     // this.isLoading = true;
-    // const login$ = this.authenticationService.login(this.loginForm.value);
-    // login$
-    //   .pipe(
-    //     finalize(() => {
-    //       this.loginForm.markAsPristine();
-    //       this.isLoading = false;
-    //     }),
-    //     untilDestroyed(this)
-    //   )
-    //   .subscribe(
-    //     (credentials) => {
-    //       log.debug(`${credentials.username} successfully logged in`);
-    //       this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
-    //     },
-    //     (error) => {
-    //       log.debug(`Login error: ${error}`);
-    //       this.error = error;
-    //     }
-    //   );
   }
 
   private createForm() {

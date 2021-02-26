@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 
-import { AuthenticationService, CredentialsService } from '@app/auth';
+import { RootFacade } from '@app/@stores/root.facade';
 
 @Component({
   selector: 'app-header',
@@ -13,22 +13,18 @@ import { AuthenticationService, CredentialsService } from '@app/auth';
 export class HeaderComponent implements OnInit {
   @Input() sidenav!: MatSidenav;
 
+  user$ = this.facade.authState$;
+
   constructor(
     private router: Router,
     private titleService: Title,
-    private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService
+    private facade: RootFacade,
   ) {}
 
   ngOnInit() {}
 
   logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
-  }
-
-  get username(): string | null {
-    const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.username : null;
+    this.facade.logout();
   }
 
   get title(): string {
