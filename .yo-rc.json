@@ -1,6 +1,6 @@
 {
   "generator-ngx-rocket": {
-    "version": "9.1.0",
+    "version": "9.2.0",
     "props": {
       "location": "path",
       "strict": false,

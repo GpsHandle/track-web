@@ -1,7 +1,7 @@
 # tracking application
 
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
-version 9.1.0
+version 9.2.0
 
 # Getting started
 
