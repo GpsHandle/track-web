@@ -17,7 +17,7 @@ import { SessionSelectors } from './session-store';
 import { StatisticSelectors } from './statistic-store';
 import { UserSelectors } from './user-store';
 
-export const selectError = createSelector (
+export const selectError = createSelector(
   AttributeSelectors.selectError,
   CalendarSelectors.selectError,
   CommandSelectors.selectError,
@@ -36,14 +36,15 @@ export const selectError = createSelector (
   // StatisticSelectors.selectError,
   // UserSelectors.selectError,
 
-  (attributeError: string,
-   calendarError: string,
-   commandError: string,
-   deviceError: string,
-   driverError: string,
-   eventError: string,
-   geofenceError: string,
-   /*groupError: string,
+  (
+    attributeError: string,
+    calendarError: string,
+    commandError: string,
+    deviceError: string,
+    driverError: string,
+    eventError: string,
+    geofenceError: string
+    /*groupError: string,
    maintenanceError: string,
    notificationError: string,
    permissionError: string,
@@ -52,14 +53,12 @@ export const selectError = createSelector (
    serverError: string,
    sessionError: string,
    statisticError: string,
-   userError: string*/) => {
-    return attributeError
+   userError: string*/
+  ) => {
+    return attributeError;
   }
 );
 
-export const selectLoading = createSelector(
-  AttributeSelectors.selectLoading,
-  (attributeLoading: boolean) => {
-    return attributeLoading
-  }
-);
+export const selectLoading = createSelector(AttributeSelectors.selectLoading, (attributeLoading: boolean) => {
+  return attributeLoading;
+});

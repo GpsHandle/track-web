@@ -1,4 +1,4 @@
-import {AuthState} from './auth-store'
+import { AuthState } from './auth-store';
 import { AttributeState } from './attribute-store';
 import { CommandState } from './command-store';
 import { CalendarState } from './calendar-store';
@@ -16,7 +16,6 @@ import { ServerState } from './server-store';
 import { SessionState } from './session-store';
 import { StatisticState } from './statistic-store';
 import { UserState } from './user-store';
-
 
 export interface RootState {
   authenticate: AuthState.State;

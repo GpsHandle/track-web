@@ -2,8 +2,8 @@ import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { Device } from '@app/@api/models/device';
 
 export const deviceAdapter: EntityAdapter<Device> = createEntityAdapter<Device>({
-  selectId: model => model.id,
-  sortComparer: (a: Device, b: Device): number => b.name.localeCompare(a.name)
+  selectId: (model) => model.id,
+  sortComparer: (a: Device, b: Device): number => b.name.localeCompare(a.name),
 });
 
 export class State {
@@ -13,5 +13,5 @@ export class State {
 
 export const initialState: State = {
   error: null,
-  loading: false
+  loading: false,
 };

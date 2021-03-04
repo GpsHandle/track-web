@@ -22,8 +22,6 @@ import { StoreModule } from '@ngrx/store';
 import { metaReducers } from '@app/@stores/reducer';
 import { EffectsModule } from '@ngrx/effects';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -45,9 +43,8 @@ import { EffectsModule } from '@ngrx/effects';
     SessionStoreModule,
     StatisticStoreModule,
     UserStoreModule,
-    StoreModule.forRoot({}, {metaReducers}),
+    StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot([]),
-
-  ]
+  ],
 })
-export class RootStoreModule { }
+export class RootStoreModule {}

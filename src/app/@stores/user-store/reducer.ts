@@ -4,7 +4,7 @@ import { initialState, State } from './state';
 export const featureKey = 'user';
 
 export const featureReducer = createReducer(
-  initialState,
+  initialState
   // ...
 );
 

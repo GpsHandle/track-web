@@ -4,14 +4,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { featureKey, reducer } from '@app/@stores/calendar-store/reducer';
 import { Effects } from '@app/@stores/calendar-store/effects';
 
-
-
 @NgModule({
   declarations: [],
-  imports: [
-    StoreModule.forFeature(featureKey, reducer),
-    EffectsModule.forFeature([Effects])
-
-  ]
+  imports: [StoreModule.forFeature(featureKey, reducer), EffectsModule.forFeature([Effects])],
 })
-export class CalendarStoreModule { }
+export class CalendarStoreModule {}

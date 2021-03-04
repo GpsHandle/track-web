@@ -12,5 +12,8 @@ export const selectError = createSelector(__state__, getError);
 export const selectLoading = createSelector(__state__, getLoading);
 export const selectUser = createSelector(__state__, getUser);
 
-export const selectAuth = createSelector(
-  selectError, selectLoading, selectUser, (error, loading, user) => ({error, loading, user}))
+export const selectAuth = createSelector(selectError, selectLoading, selectUser, (error, loading, user) => ({
+  error,
+  loading,
+  user,
+}));

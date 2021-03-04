@@ -9,5 +9,5 @@ export class State {
 export const initialState: State = {
   error: null,
   loading: false,
-  user: null
+  user: null,
 };

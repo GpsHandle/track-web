@@ -4,12 +4,8 @@ import { featureKey, reducer } from '@app/@stores/command-store/reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { Effects } from '@app/@stores/command-store/effects';
 
-
-
 @NgModule({
   declarations: [],
-  imports: [
-    StoreModule.forFeature(featureKey, reducer),
-    EffectsModule.forFeature([Effects])  ]
+  imports: [StoreModule.forFeature(featureKey, reducer), EffectsModule.forFeature([Effects])],
 })
-export class CommandStoreModule { }
+export class CommandStoreModule {}

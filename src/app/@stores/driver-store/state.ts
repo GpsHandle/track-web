@@ -5,5 +5,5 @@ export class State {
 
 export const initialState: State = {
   error: null,
-  loading: false
+  loading: false,
 };

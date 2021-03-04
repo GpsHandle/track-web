@@ -4,13 +4,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { Effects } from '@app/@stores/position-store/effects';
 import { featureKey, reducer } from '@app/@stores/position-store/reducer';
 
-
-
 @NgModule({
   declarations: [],
-  imports: [
-    StoreModule.forFeature(featureKey, reducer),
-    EffectsModule.forFeature([Effects])
-  ]
+  imports: [StoreModule.forFeature(featureKey, reducer), EffectsModule.forFeature([Effects])],
 })
-export class PositionStoreModule { }
+export class PositionStoreModule {}

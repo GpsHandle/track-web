@@ -8,5 +8,8 @@ export enum ActionTypes {
 }
 
 export const loadAllDeviceRequestAction = createAction(ActionTypes.LOAD_ALL_DEVICE_REQUEST);
-export const loadAllDeviceSuccessAction = createAction(ActionTypes.LOAD_ALL_DEVICE_SUCCESS, props<{items: Device[]}>());
-export const loadAllDeviceFailureAction = createAction(ActionTypes.LOAD_ALL_DEVICE_FAILURE, props<{error: string}>());
+export const loadAllDeviceSuccessAction = createAction(
+  ActionTypes.LOAD_ALL_DEVICE_SUCCESS,
+  props<{ items: Device[] }>()
+);
+export const loadAllDeviceFailureAction = createAction(ActionTypes.LOAD_ALL_DEVICE_FAILURE, props<{ error: string }>());

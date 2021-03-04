@@ -4,7 +4,7 @@ import { initialState, State } from './state';
 export const featureKey = 'event';
 
 export const featureReducer = createReducer(
-  initialState,
+  initialState
   // ...
 );
 
