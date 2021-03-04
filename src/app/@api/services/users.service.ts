@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { User } from '../models/user';
 
-
 /**
  * User management
  */
@@ -19,10 +18,7 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UsersService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,27 +38,29 @@ export class UsersService extends BaseService {
    * This method doesn't expect any request body.
    */
   usersGet$Response(params?: {
-
     /**
      * Can only be used by admin or manager users
      */
     userId?: string;
   }): Observable<StrictHttpResponse<Array<User>>> {
-
     const rb = new RequestBuilder(this.rootUrl, UsersService.UsersGetPath, 'get');
     if (params) {
       rb.query('userId', params.userId, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<User>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<User>>;
+        })
+      );
   }
 
   /**
@@ -76,16 +74,12 @@ export class UsersService extends BaseService {
    * This method doesn't expect any request body.
    */
   usersGet(params?: {
-
     /**
      * Can only be used by admin or manager users
      */
     userId?: string;
   }): Observable<Array<User>> {
-
-    return this.usersGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<User>>) => r.body as Array<User>)
-    );
+    return this.usersGet$Response(params).pipe(map((r: StrictHttpResponse<Array<User>>) => r.body as Array<User>));
   }
 
   /**
@@ -103,24 +97,25 @@ export class UsersService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  usersPost$Response(params: {
-    body: User
-  }): Observable<StrictHttpResponse<User>> {
-
+  usersPost$Response(params: { body: User }): Observable<StrictHttpResponse<User>> {
     const rb = new RequestBuilder(this.rootUrl, UsersService.UsersPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<User>;
+        })
+      );
   }
 
   /**
@@ -133,13 +128,8 @@ export class UsersService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  usersPost(params: {
-    body: User
-  }): Observable<User> {
-
-    return this.usersPost$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
-    );
+  usersPost(params: { body: User }): Observable<User> {
+    return this.usersPost$Response(params).pipe(map((r: StrictHttpResponse<User>) => r.body as User));
   }
 
   /**
@@ -157,26 +147,26 @@ export class UsersService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  usersIdPut$Response(params: {
-    id: number;
-    body: User
-  }): Observable<StrictHttpResponse<User>> {
-
+  usersIdPut$Response(params: { id: number; body: User }): Observable<StrictHttpResponse<User>> {
     const rb = new RequestBuilder(this.rootUrl, UsersService.UsersIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<User>;
+        })
+      );
   }
 
   /**
@@ -189,14 +179,8 @@ export class UsersService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  usersIdPut(params: {
-    id: number;
-    body: User
-  }): Observable<User> {
-
-    return this.usersIdPut$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
-    );
+  usersIdPut(params: { id: number; body: User }): Observable<User> {
+    return this.usersIdPut$Response(params).pipe(map((r: StrictHttpResponse<User>) => r.body as User));
   }
 
   /**
@@ -214,24 +198,25 @@ export class UsersService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  usersIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  usersIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, UsersService.UsersIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -244,13 +229,7 @@ export class UsersService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  usersIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.usersIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  usersIdDelete(params: { id: number }): Observable<void> {
+    return this.usersIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

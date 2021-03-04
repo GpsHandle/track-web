@@ -12,7 +12,6 @@ import { map, filter } from 'rxjs/operators';
 import { Device } from '../models/device';
 import { DeviceAccumulators } from '../models/device-accumulators';
 
-
 /**
  * Device management
  */
@@ -20,10 +19,7 @@ import { DeviceAccumulators } from '../models/device-accumulators';
   providedIn: 'root',
 })
 export class DevicesService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -43,7 +39,6 @@ export class DevicesService extends BaseService {
    * This method doesn't expect any request body.
    */
   devicesGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -64,7 +59,6 @@ export class DevicesService extends BaseService {
      */
     uniqueId?: string;
   }): Observable<StrictHttpResponse<Array<Device>>> {
-
     const rb = new RequestBuilder(this.rootUrl, DevicesService.DevicesGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
@@ -73,15 +67,19 @@ export class DevicesService extends BaseService {
       rb.query('uniqueId', params.uniqueId, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Device>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Device>>;
+        })
+      );
   }
 
   /**
@@ -95,7 +93,6 @@ export class DevicesService extends BaseService {
    * This method doesn't expect any request body.
    */
   devicesGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -116,7 +113,6 @@ export class DevicesService extends BaseService {
      */
     uniqueId?: string;
   }): Observable<Array<Device>> {
-
     return this.devicesGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Device>>) => r.body as Array<Device>)
     );
@@ -137,24 +133,25 @@ export class DevicesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  devicesPost$Response(params: {
-    body: Device
-  }): Observable<StrictHttpResponse<Device>> {
-
+  devicesPost$Response(params: { body: Device }): Observable<StrictHttpResponse<Device>> {
     const rb = new RequestBuilder(this.rootUrl, DevicesService.DevicesPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Device>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Device>;
+        })
+      );
   }
 
   /**
@@ -167,13 +164,8 @@ export class DevicesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  devicesPost(params: {
-    body: Device
-  }): Observable<Device> {
-
-    return this.devicesPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Device>) => r.body as Device)
-    );
+  devicesPost(params: { body: Device }): Observable<Device> {
+    return this.devicesPost$Response(params).pipe(map((r: StrictHttpResponse<Device>) => r.body as Device));
   }
 
   /**
@@ -191,26 +183,26 @@ export class DevicesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  devicesIdPut$Response(params: {
-    id: number;
-    body: Device
-  }): Observable<StrictHttpResponse<Device>> {
-
+  devicesIdPut$Response(params: { id: number; body: Device }): Observable<StrictHttpResponse<Device>> {
     const rb = new RequestBuilder(this.rootUrl, DevicesService.DevicesIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Device>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Device>;
+        })
+      );
   }
 
   /**
@@ -223,14 +215,8 @@ export class DevicesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  devicesIdPut(params: {
-    id: number;
-    body: Device
-  }): Observable<Device> {
-
-    return this.devicesIdPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Device>) => r.body as Device)
-    );
+  devicesIdPut(params: { id: number; body: Device }): Observable<Device> {
+    return this.devicesIdPut$Response(params).pipe(map((r: StrictHttpResponse<Device>) => r.body as Device));
   }
 
   /**
@@ -248,24 +234,25 @@ export class DevicesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  devicesIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  devicesIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, DevicesService.DevicesIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -278,13 +265,8 @@ export class DevicesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  devicesIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.devicesIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  devicesIdDelete(params: { id: number }): Observable<void> {
+    return this.devicesIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
 
   /**
@@ -304,24 +286,27 @@ export class DevicesService extends BaseService {
    */
   devicesIdAccumulatorsPut$Response(params: {
     id: number;
-    body: DeviceAccumulators
+    body: DeviceAccumulators;
   }): Observable<StrictHttpResponse<void>> {
-
     const rb = new RequestBuilder(this.rootUrl, DevicesService.DevicesIdAccumulatorsPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -334,14 +319,7 @@ export class DevicesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  devicesIdAccumulatorsPut(params: {
-    id: number;
-    body: DeviceAccumulators
-  }): Observable<void> {
-
-    return this.devicesIdAccumulatorsPut$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  devicesIdAccumulatorsPut(params: { id: number; body: DeviceAccumulators }): Observable<void> {
+    return this.devicesIdAccumulatorsPut$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

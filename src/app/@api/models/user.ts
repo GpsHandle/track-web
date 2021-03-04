@@ -2,7 +2,7 @@
 /* eslint-disable */
 export interface User {
   administrator?: boolean;
-  attributes?: {  };
+  attributes?: {};
   coordinateFormat?: string;
   deviceLimit?: number;
   deviceReadonly?: boolean;

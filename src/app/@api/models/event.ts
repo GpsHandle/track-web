@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Event {
-  attributes?: {  };
+  attributes?: {};
   deviceId?: number;
   geofenceId?: number;
   id?: number;

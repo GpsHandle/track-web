@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Geofence } from '../models/geofence';
 
-
 /**
  * Geofence management
  */
@@ -19,10 +18,7 @@ import { Geofence } from '../models/geofence';
   providedIn: 'root',
 })
 export class GeofencesService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class GeofencesService extends BaseService {
    * This method doesn't expect any request body.
    */
   geofencesGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -64,7 +59,6 @@ export class GeofencesService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<StrictHttpResponse<Array<Geofence>>> {
-
     const rb = new RequestBuilder(this.rootUrl, GeofencesService.GeofencesGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
@@ -74,15 +68,19 @@ export class GeofencesService extends BaseService {
       rb.query('refresh', params.refresh, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Geofence>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Geofence>>;
+        })
+      );
   }
 
   /**
@@ -96,7 +94,6 @@ export class GeofencesService extends BaseService {
    * This method doesn't expect any request body.
    */
   geofencesGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -118,7 +115,6 @@ export class GeofencesService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<Array<Geofence>> {
-
     return this.geofencesGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Geofence>>) => r.body as Array<Geofence>)
     );
@@ -139,24 +135,25 @@ export class GeofencesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  geofencesPost$Response(params: {
-    body: Geofence
-  }): Observable<StrictHttpResponse<Geofence>> {
-
+  geofencesPost$Response(params: { body: Geofence }): Observable<StrictHttpResponse<Geofence>> {
     const rb = new RequestBuilder(this.rootUrl, GeofencesService.GeofencesPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Geofence>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Geofence>;
+        })
+      );
   }
 
   /**
@@ -169,13 +166,8 @@ export class GeofencesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  geofencesPost(params: {
-    body: Geofence
-  }): Observable<Geofence> {
-
-    return this.geofencesPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Geofence>) => r.body as Geofence)
-    );
+  geofencesPost(params: { body: Geofence }): Observable<Geofence> {
+    return this.geofencesPost$Response(params).pipe(map((r: StrictHttpResponse<Geofence>) => r.body as Geofence));
   }
 
   /**
@@ -193,26 +185,26 @@ export class GeofencesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  geofencesIdPut$Response(params: {
-    id: number;
-    body: Geofence
-  }): Observable<StrictHttpResponse<Geofence>> {
-
+  geofencesIdPut$Response(params: { id: number; body: Geofence }): Observable<StrictHttpResponse<Geofence>> {
     const rb = new RequestBuilder(this.rootUrl, GeofencesService.GeofencesIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Geofence>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Geofence>;
+        })
+      );
   }
 
   /**
@@ -225,14 +217,8 @@ export class GeofencesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  geofencesIdPut(params: {
-    id: number;
-    body: Geofence
-  }): Observable<Geofence> {
-
-    return this.geofencesIdPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Geofence>) => r.body as Geofence)
-    );
+  geofencesIdPut(params: { id: number; body: Geofence }): Observable<Geofence> {
+    return this.geofencesIdPut$Response(params).pipe(map((r: StrictHttpResponse<Geofence>) => r.body as Geofence));
   }
 
   /**
@@ -250,24 +236,25 @@ export class GeofencesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  geofencesIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  geofencesIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, GeofencesService.GeofencesIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -280,13 +267,7 @@ export class GeofencesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  geofencesIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.geofencesIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  geofencesIdDelete(params: { id: number }): Observable<void> {
+    return this.geofencesIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

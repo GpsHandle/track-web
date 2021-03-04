@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Server } from '../models/server';
 
-
 /**
  * Server information
  */
@@ -19,10 +18,7 @@ import { Server } from '../models/server';
   providedIn: 'root',
 })
 export class ServerService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -41,22 +37,24 @@ export class ServerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  serverGet$Response(params?: {
-  }): Observable<StrictHttpResponse<Server>> {
-
+  serverGet$Response(params?: {}): Observable<StrictHttpResponse<Server>> {
     const rb = new RequestBuilder(this.rootUrl, ServerService.ServerGetPath, 'get');
     if (params) {
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Server>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Server>;
+        })
+      );
   }
 
   /**
@@ -69,12 +67,8 @@ export class ServerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  serverGet(params?: {
-  }): Observable<Server> {
-
-    return this.serverGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Server>) => r.body as Server)
-    );
+  serverGet(params?: {}): Observable<Server> {
+    return this.serverGet$Response(params).pipe(map((r: StrictHttpResponse<Server>) => r.body as Server));
   }
 
   /**
@@ -92,24 +86,25 @@ export class ServerService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  serverPut$Response(params: {
-    body: Server
-  }): Observable<StrictHttpResponse<Server>> {
-
+  serverPut$Response(params: { body: Server }): Observable<StrictHttpResponse<Server>> {
     const rb = new RequestBuilder(this.rootUrl, ServerService.ServerPutPath, 'put');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Server>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Server>;
+        })
+      );
   }
 
   /**
@@ -122,13 +117,7 @@ export class ServerService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  serverPut(params: {
-    body: Server
-  }): Observable<Server> {
-
-    return this.serverPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Server>) => r.body as Server)
-    );
+  serverPut(params: { body: Server }): Observable<Server> {
+    return this.serverPut$Response(params).pipe(map((r: StrictHttpResponse<Server>) => r.body as Server));
   }
-
 }

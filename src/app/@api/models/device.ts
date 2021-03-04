@@ -1,7 +1,7 @@
-                                             /* tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 export interface Device {
-  attributes?: {  };
+  attributes?: {};
   category?: string;
   contact?: string;
   disabled?: boolean;

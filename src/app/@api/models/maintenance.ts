@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Maintenance {
-  attributes?: {  };
+  attributes?: {};
   id?: number;
   name?: string;
   period?: number;

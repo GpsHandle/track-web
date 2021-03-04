@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Calendar {
-  attributes?: {  };
+  attributes?: {};
 
   /**
    * base64 encoded in iCalendar format

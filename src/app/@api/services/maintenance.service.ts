@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Maintenance } from '../models/maintenance';
 
-
 /**
  * Maintenance management
  */
@@ -19,10 +18,7 @@ import { Maintenance } from '../models/maintenance';
   providedIn: 'root',
 })
 export class MaintenanceService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class MaintenanceService extends BaseService {
    * This method doesn't expect any request body.
    */
   maintenanceGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -64,7 +59,6 @@ export class MaintenanceService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<StrictHttpResponse<Array<Maintenance>>> {
-
     const rb = new RequestBuilder(this.rootUrl, MaintenanceService.MaintenanceGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
@@ -74,15 +68,19 @@ export class MaintenanceService extends BaseService {
       rb.query('refresh', params.refresh, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Maintenance>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Maintenance>>;
+        })
+      );
   }
 
   /**
@@ -96,7 +94,6 @@ export class MaintenanceService extends BaseService {
    * This method doesn't expect any request body.
    */
   maintenanceGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -118,7 +115,6 @@ export class MaintenanceService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<Array<Maintenance>> {
-
     return this.maintenanceGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Maintenance>>) => r.body as Array<Maintenance>)
     );
@@ -139,24 +135,25 @@ export class MaintenanceService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  maintenancePost$Response(params: {
-    body: Maintenance
-  }): Observable<StrictHttpResponse<Maintenance>> {
-
+  maintenancePost$Response(params: { body: Maintenance }): Observable<StrictHttpResponse<Maintenance>> {
     const rb = new RequestBuilder(this.rootUrl, MaintenanceService.MaintenancePostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Maintenance>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Maintenance>;
+        })
+      );
   }
 
   /**
@@ -169,10 +166,7 @@ export class MaintenanceService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  maintenancePost(params: {
-    body: Maintenance
-  }): Observable<Maintenance> {
-
+  maintenancePost(params: { body: Maintenance }): Observable<Maintenance> {
     return this.maintenancePost$Response(params).pipe(
       map((r: StrictHttpResponse<Maintenance>) => r.body as Maintenance)
     );
@@ -193,26 +187,26 @@ export class MaintenanceService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  maintenanceIdPut$Response(params: {
-    id: number;
-    body: Maintenance
-  }): Observable<StrictHttpResponse<Maintenance>> {
-
+  maintenanceIdPut$Response(params: { id: number; body: Maintenance }): Observable<StrictHttpResponse<Maintenance>> {
     const rb = new RequestBuilder(this.rootUrl, MaintenanceService.MaintenanceIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Maintenance>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Maintenance>;
+        })
+      );
   }
 
   /**
@@ -225,11 +219,7 @@ export class MaintenanceService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  maintenanceIdPut(params: {
-    id: number;
-    body: Maintenance
-  }): Observable<Maintenance> {
-
+  maintenanceIdPut(params: { id: number; body: Maintenance }): Observable<Maintenance> {
     return this.maintenanceIdPut$Response(params).pipe(
       map((r: StrictHttpResponse<Maintenance>) => r.body as Maintenance)
     );
@@ -250,24 +240,25 @@ export class MaintenanceService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  maintenanceIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  maintenanceIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, MaintenanceService.MaintenanceIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -280,13 +271,7 @@ export class MaintenanceService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  maintenanceIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.maintenanceIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  maintenanceIdDelete(params: { id: number }): Observable<void> {
+    return this.maintenanceIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

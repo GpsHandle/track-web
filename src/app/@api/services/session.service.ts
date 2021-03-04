@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { User } from '../models/user';
 
-
 /**
  * User session management
  */
@@ -19,10 +18,7 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class SessionService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -41,24 +37,25 @@ export class SessionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  sessionGet$Response(params?: {
-    token?: string;
-  }): Observable<StrictHttpResponse<User>> {
-
+  sessionGet$Response(params?: { token?: string }): Observable<StrictHttpResponse<User>> {
     const rb = new RequestBuilder(this.rootUrl, SessionService.SessionGetPath, 'get');
     if (params) {
       rb.query('token', params.token, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<User>;
+        })
+      );
   }
 
   /**
@@ -71,13 +68,8 @@ export class SessionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  sessionGet(params?: {
-    token?: string;
-  }): Observable<User> {
-
-    return this.sessionGet$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
-    );
+  sessionGet(params?: { token?: string }): Observable<User> {
+    return this.sessionGet$Response(params).pipe(map((r: StrictHttpResponse<User>) => r.body as User));
   }
 
   /**
@@ -95,24 +87,25 @@ export class SessionService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  sessionPost$Response(params: {
-    body: { 'email': string, 'password': string }
-  }): Observable<StrictHttpResponse<User>> {
-
+  sessionPost$Response(params: { body: { email: string; password: string } }): Observable<StrictHttpResponse<User>> {
     const rb = new RequestBuilder(this.rootUrl, SessionService.SessionPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/x-www-form-urlencoded');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<User>;
+        })
+      );
   }
 
   /**
@@ -125,13 +118,8 @@ export class SessionService extends BaseService {
    *
    * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
    */
-  sessionPost(params: {
-    body: { 'email': string, 'password': string }
-  }): Observable<User> {
-
-    return this.sessionPost$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
-    );
+  sessionPost(params: { body: { email: string; password: string } }): Observable<User> {
+    return this.sessionPost$Response(params).pipe(map((r: StrictHttpResponse<User>) => r.body as User));
   }
 
   /**
@@ -149,22 +137,24 @@ export class SessionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  sessionDelete$Response(params?: {
-  }): Observable<StrictHttpResponse<void>> {
-
+  sessionDelete$Response(params?: {}): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, SessionService.SessionDeletePath, 'delete');
     if (params) {
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -177,12 +167,7 @@ export class SessionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  sessionDelete(params?: {
-  }): Observable<void> {
-
-    return this.sessionDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  sessionDelete(params?: {}): Observable<void> {
+    return this.sessionDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

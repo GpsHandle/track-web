@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Statistics } from '../models/statistics';
 
-
 /**
  * Retrieving server statistics
  */
@@ -19,10 +18,7 @@ import { Statistics } from '../models/statistics';
   providedIn: 'root',
 })
 export class StatisticsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class StatisticsService extends BaseService {
    * This method doesn't expect any request body.
    */
   statisticsGet$Response(params: {
-
     /**
      * in IS0 8601 format. eg. &#x60;1963-11-22T18:30:00Z&#x60;
      */
@@ -53,22 +48,25 @@ export class StatisticsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<Statistics>>> {
-
     const rb = new RequestBuilder(this.rootUrl, StatisticsService.StatisticsGetPath, 'get');
     if (params) {
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Statistics>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Statistics>>;
+        })
+      );
   }
 
   /**
@@ -82,7 +80,6 @@ export class StatisticsService extends BaseService {
    * This method doesn't expect any request body.
    */
   statisticsGet(params: {
-
     /**
      * in IS0 8601 format. eg. &#x60;1963-11-22T18:30:00Z&#x60;
      */
@@ -93,10 +90,8 @@ export class StatisticsService extends BaseService {
      */
     to: string;
   }): Observable<Array<Statistics>> {
-
     return this.statisticsGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Statistics>>) => r.body as Array<Statistics>)
     );
   }
-
 }

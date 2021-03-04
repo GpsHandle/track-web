@@ -2,7 +2,7 @@
 /* eslint-disable */
 export interface Notification {
   always?: boolean;
-  attributes?: {  };
+  attributes?: {};
   calendarId?: number;
   id?: number;
   mail?: boolean;

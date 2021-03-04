@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Permission } from '../models/permission';
 
-
 /**
  * User permissions and other object linking
  */
@@ -19,10 +18,7 @@ import { Permission } from '../models/permission';
   providedIn: 'root',
 })
 export class PermissionsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -41,24 +37,25 @@ export class PermissionsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  permissionsPost$Response(params: {
-    body: Permission
-  }): Observable<StrictHttpResponse<Permission>> {
-
+  permissionsPost$Response(params: { body: Permission }): Observable<StrictHttpResponse<Permission>> {
     const rb = new RequestBuilder(this.rootUrl, PermissionsService.PermissionsPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Permission>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Permission>;
+        })
+      );
   }
 
   /**
@@ -71,13 +68,8 @@ export class PermissionsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  permissionsPost(params: {
-    body: Permission
-  }): Observable<Permission> {
-
-    return this.permissionsPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Permission>) => r.body as Permission)
-    );
+  permissionsPost(params: { body: Permission }): Observable<Permission> {
+    return this.permissionsPost$Response(params).pipe(map((r: StrictHttpResponse<Permission>) => r.body as Permission));
   }
 
   /**
@@ -95,24 +87,25 @@ export class PermissionsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  permissionsDelete$Response(params: {
-    body: Permission
-  }): Observable<StrictHttpResponse<void>> {
-
+  permissionsDelete$Response(params: { body: Permission }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, PermissionsService.PermissionsDeletePath, 'delete');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -125,13 +118,7 @@ export class PermissionsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  permissionsDelete(params: {
-    body: Permission
-  }): Observable<void> {
-
-    return this.permissionsDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  permissionsDelete(params: { body: Permission }): Observable<void> {
+    return this.permissionsDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

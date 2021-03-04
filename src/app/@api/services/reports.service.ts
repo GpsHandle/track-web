@@ -15,7 +15,6 @@ import { ReportStops } from '../models/report-stops';
 import { ReportSummary } from '../models/report-summary';
 import { ReportTrips } from '../models/report-trips';
 
-
 /**
  * Reports generation
  */
@@ -23,10 +22,7 @@ import { ReportTrips } from '../models/report-trips';
   providedIn: 'root',
 })
 export class ReportsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -59,24 +55,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<Position>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsRouteGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Position>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Position>>;
+        })
+      );
   }
 
   /**
@@ -103,7 +102,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<Position>> {
-
     return this.reportsRouteGet$Json$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)
     );
@@ -133,24 +131,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<Position>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsRouteGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Position>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Position>>;
+        })
+      );
   }
 
   /**
@@ -177,7 +178,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<Position>> {
-
     return this.reportsRouteGet$VndOpenxmlformatsOfficedocumentSpreadsheetmlSheet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)
     );
@@ -217,25 +217,28 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<Event>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsEventsGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
-      rb.query('type', params.type, {"style":"form","explode":false});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
+      rb.query('type', params.type, { style: 'form', explode: false });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Event>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Event>>;
+        })
+      );
   }
 
   /**
@@ -267,7 +270,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<Event>> {
-
     return this.reportsEventsGet$Json$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Event>>) => r.body as Array<Event>)
     );
@@ -302,25 +304,28 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<Event>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsEventsGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
-      rb.query('type', params.type, {"style":"form","explode":false});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
+      rb.query('type', params.type, { style: 'form', explode: false });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Event>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Event>>;
+        })
+      );
   }
 
   /**
@@ -352,7 +357,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<Event>> {
-
     return this.reportsEventsGet$VndOpenxmlformatsOfficedocumentSpreadsheetmlSheet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Event>>) => r.body as Array<Event>)
     );
@@ -387,24 +391,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<ReportSummary>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsSummaryGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<ReportSummary>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<ReportSummary>>;
+        })
+      );
   }
 
   /**
@@ -431,7 +438,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<ReportSummary>> {
-
     return this.reportsSummaryGet$Json$Response(params).pipe(
       map((r: StrictHttpResponse<Array<ReportSummary>>) => r.body as Array<ReportSummary>)
     );
@@ -461,24 +467,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<ReportSummary>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsSummaryGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<ReportSummary>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<ReportSummary>>;
+        })
+      );
   }
 
   /**
@@ -505,7 +514,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<ReportSummary>> {
-
     return this.reportsSummaryGet$VndOpenxmlformatsOfficedocumentSpreadsheetmlSheet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<ReportSummary>>) => r.body as Array<ReportSummary>)
     );
@@ -540,24 +548,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<ReportTrips>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsTripsGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<ReportTrips>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<ReportTrips>>;
+        })
+      );
   }
 
   /**
@@ -584,7 +595,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<ReportTrips>> {
-
     return this.reportsTripsGet$Json$Response(params).pipe(
       map((r: StrictHttpResponse<Array<ReportTrips>>) => r.body as Array<ReportTrips>)
     );
@@ -614,24 +624,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<ReportTrips>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsTripsGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<ReportTrips>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<ReportTrips>>;
+        })
+      );
   }
 
   /**
@@ -658,7 +671,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<ReportTrips>> {
-
     return this.reportsTripsGet$VndOpenxmlformatsOfficedocumentSpreadsheetmlSheet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<ReportTrips>>) => r.body as Array<ReportTrips>)
     );
@@ -693,24 +705,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<ReportStops>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsStopsGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<ReportStops>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<ReportStops>>;
+        })
+      );
   }
 
   /**
@@ -737,7 +752,6 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<ReportStops>> {
-
     return this.reportsStopsGet$Json$Response(params).pipe(
       map((r: StrictHttpResponse<Array<ReportStops>>) => r.body as Array<ReportStops>)
     );
@@ -767,24 +781,27 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<StrictHttpResponse<Array<ReportStops>>> {
-
     const rb = new RequestBuilder(this.rootUrl, ReportsService.ReportsStopsGetPath, 'get');
     if (params) {
-      rb.query('deviceId', params.deviceId, {"style":"form","explode":true});
-      rb.query('groupId', params.groupId, {"style":"form","explode":true});
+      rb.query('deviceId', params.deviceId, { style: 'form', explode: true });
+      rb.query('groupId', params.groupId, { style: 'form', explode: true });
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<ReportStops>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<ReportStops>>;
+        })
+      );
   }
 
   /**
@@ -811,10 +828,8 @@ export class ReportsService extends BaseService {
      */
     to: string;
   }): Observable<Array<ReportStops>> {
-
     return this.reportsStopsGet$VndOpenxmlformatsOfficedocumentSpreadsheetmlSheet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<ReportStops>>) => r.body as Array<ReportStops>)
     );
   }
-
 }

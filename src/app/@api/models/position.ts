@@ -4,7 +4,7 @@ export interface Position {
   accuracy?: number;
   address?: string;
   altitude?: number;
-  attributes?: {  };
+  attributes?: {};
   course?: number;
   deviceId?: number;
 
@@ -20,7 +20,7 @@ export interface Position {
   id?: number;
   latitude?: number;
   longitude?: number;
-  network?: {  };
+  network?: {};
   outdated?: boolean;
   protocol?: string;
 

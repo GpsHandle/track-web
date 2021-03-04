@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Driver {
-  attributes?: {  };
+  attributes?: {};
   id?: number;
   name?: string;
   uniqueId?: string;

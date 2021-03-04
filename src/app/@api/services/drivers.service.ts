@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Driver } from '../models/driver';
 
-
 /**
  * Drivers management
  */
@@ -19,10 +18,7 @@ import { Driver } from '../models/driver';
   providedIn: 'root',
 })
 export class DriversService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class DriversService extends BaseService {
    * This method doesn't expect any request body.
    */
   driversGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -64,7 +59,6 @@ export class DriversService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<StrictHttpResponse<Array<Driver>>> {
-
     const rb = new RequestBuilder(this.rootUrl, DriversService.DriversGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
@@ -74,15 +68,19 @@ export class DriversService extends BaseService {
       rb.query('refresh', params.refresh, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Driver>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Driver>>;
+        })
+      );
   }
 
   /**
@@ -96,7 +94,6 @@ export class DriversService extends BaseService {
    * This method doesn't expect any request body.
    */
   driversGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -118,7 +115,6 @@ export class DriversService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<Array<Driver>> {
-
     return this.driversGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Driver>>) => r.body as Array<Driver>)
     );
@@ -139,24 +135,25 @@ export class DriversService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  driversPost$Response(params: {
-    body: Driver
-  }): Observable<StrictHttpResponse<Driver>> {
-
+  driversPost$Response(params: { body: Driver }): Observable<StrictHttpResponse<Driver>> {
     const rb = new RequestBuilder(this.rootUrl, DriversService.DriversPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Driver>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Driver>;
+        })
+      );
   }
 
   /**
@@ -169,13 +166,8 @@ export class DriversService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  driversPost(params: {
-    body: Driver
-  }): Observable<Driver> {
-
-    return this.driversPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Driver>) => r.body as Driver)
-    );
+  driversPost(params: { body: Driver }): Observable<Driver> {
+    return this.driversPost$Response(params).pipe(map((r: StrictHttpResponse<Driver>) => r.body as Driver));
   }
 
   /**
@@ -193,26 +185,26 @@ export class DriversService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  driversIdPut$Response(params: {
-    id: number;
-    body: Driver
-  }): Observable<StrictHttpResponse<Driver>> {
-
+  driversIdPut$Response(params: { id: number; body: Driver }): Observable<StrictHttpResponse<Driver>> {
     const rb = new RequestBuilder(this.rootUrl, DriversService.DriversIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Driver>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Driver>;
+        })
+      );
   }
 
   /**
@@ -225,14 +217,8 @@ export class DriversService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  driversIdPut(params: {
-    id: number;
-    body: Driver
-  }): Observable<Driver> {
-
-    return this.driversIdPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Driver>) => r.body as Driver)
-    );
+  driversIdPut(params: { id: number; body: Driver }): Observable<Driver> {
+    return this.driversIdPut$Response(params).pipe(map((r: StrictHttpResponse<Driver>) => r.body as Driver));
   }
 
   /**
@@ -250,24 +236,25 @@ export class DriversService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  driversIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  driversIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, DriversService.DriversIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -280,13 +267,7 @@ export class DriversService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  driversIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.driversIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  driversIdDelete(params: { id: number }): Observable<void> {
+    return this.driversIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

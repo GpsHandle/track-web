@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Group } from '../models/group';
 
-
 /**
  * Group management
  */
@@ -19,10 +18,7 @@ import { Group } from '../models/group';
   providedIn: 'root',
 })
 export class GroupsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class GroupsService extends BaseService {
    * This method doesn't expect any request body.
    */
   groupsGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -53,22 +48,25 @@ export class GroupsService extends BaseService {
      */
     userId?: number;
   }): Observable<StrictHttpResponse<Array<Group>>> {
-
     const rb = new RequestBuilder(this.rootUrl, GroupsService.GroupsGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
       rb.query('userId', params.userId, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Group>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Group>>;
+        })
+      );
   }
 
   /**
@@ -82,7 +80,6 @@ export class GroupsService extends BaseService {
    * This method doesn't expect any request body.
    */
   groupsGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -93,10 +90,7 @@ export class GroupsService extends BaseService {
      */
     userId?: number;
   }): Observable<Array<Group>> {
-
-    return this.groupsGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<Group>>) => r.body as Array<Group>)
-    );
+    return this.groupsGet$Response(params).pipe(map((r: StrictHttpResponse<Array<Group>>) => r.body as Array<Group>));
   }
 
   /**
@@ -114,24 +108,25 @@ export class GroupsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  groupsPost$Response(params: {
-    body: Group
-  }): Observable<StrictHttpResponse<Group>> {
-
+  groupsPost$Response(params: { body: Group }): Observable<StrictHttpResponse<Group>> {
     const rb = new RequestBuilder(this.rootUrl, GroupsService.GroupsPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Group>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Group>;
+        })
+      );
   }
 
   /**
@@ -144,13 +139,8 @@ export class GroupsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  groupsPost(params: {
-    body: Group
-  }): Observable<Group> {
-
-    return this.groupsPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Group>) => r.body as Group)
-    );
+  groupsPost(params: { body: Group }): Observable<Group> {
+    return this.groupsPost$Response(params).pipe(map((r: StrictHttpResponse<Group>) => r.body as Group));
   }
 
   /**
@@ -168,26 +158,26 @@ export class GroupsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  groupsIdPut$Response(params: {
-    id: number;
-    body: Group
-  }): Observable<StrictHttpResponse<Group>> {
-
+  groupsIdPut$Response(params: { id: number; body: Group }): Observable<StrictHttpResponse<Group>> {
     const rb = new RequestBuilder(this.rootUrl, GroupsService.GroupsIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Group>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Group>;
+        })
+      );
   }
 
   /**
@@ -200,14 +190,8 @@ export class GroupsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  groupsIdPut(params: {
-    id: number;
-    body: Group
-  }): Observable<Group> {
-
-    return this.groupsIdPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Group>) => r.body as Group)
-    );
+  groupsIdPut(params: { id: number; body: Group }): Observable<Group> {
+    return this.groupsIdPut$Response(params).pipe(map((r: StrictHttpResponse<Group>) => r.body as Group));
   }
 
   /**
@@ -225,24 +209,25 @@ export class GroupsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  groupsIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  groupsIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, GroupsService.GroupsIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -255,13 +240,7 @@ export class GroupsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  groupsIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.groupsIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  groupsIdDelete(params: { id: number }): Observable<void> {
+    return this.groupsIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

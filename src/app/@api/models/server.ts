@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Server {
-  attributes?: {  };
+  attributes?: {};
   bingKey?: string;
   coordinateFormat?: string;
   deviceReadonly?: boolean;

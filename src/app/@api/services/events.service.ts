@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Event } from '../models/event';
 
-
 /**
  * Retrieving event information
  */
@@ -19,10 +18,7 @@ import { Event } from '../models/event';
   providedIn: 'root',
 })
 export class EventsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -37,24 +33,25 @@ export class EventsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  eventsIdGet$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<Event>> {
-
+  eventsIdGet$Response(params: { id: number }): Observable<StrictHttpResponse<Event>> {
     const rb = new RequestBuilder(this.rootUrl, EventsService.EventsIdGetPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Event>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Event>;
+        })
+      );
   }
 
   /**
@@ -63,13 +60,7 @@ export class EventsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  eventsIdGet(params: {
-    id: number;
-  }): Observable<Event> {
-
-    return this.eventsIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Event>) => r.body as Event)
-    );
+  eventsIdGet(params: { id: number }): Observable<Event> {
+    return this.eventsIdGet$Response(params).pipe(map((r: StrictHttpResponse<Event>) => r.body as Event));
   }
-
 }

@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Attribute } from '../models/attribute';
 
-
 /**
  * Computed attributes management
  */
@@ -19,10 +18,7 @@ import { Attribute } from '../models/attribute';
   providedIn: 'root',
 })
 export class AttributesService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class AttributesService extends BaseService {
    * This method doesn't expect any request body.
    */
   attributesComputedGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -64,7 +59,6 @@ export class AttributesService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<StrictHttpResponse<Array<Attribute>>> {
-
     const rb = new RequestBuilder(this.rootUrl, AttributesService.AttributesComputedGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
@@ -74,15 +68,19 @@ export class AttributesService extends BaseService {
       rb.query('refresh', params.refresh, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Attribute>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Attribute>>;
+        })
+      );
   }
 
   /**
@@ -96,7 +94,6 @@ export class AttributesService extends BaseService {
    * This method doesn't expect any request body.
    */
   attributesComputedGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -118,7 +115,6 @@ export class AttributesService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<Array<Attribute>> {
-
     return this.attributesComputedGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Attribute>>) => r.body as Array<Attribute>)
     );
@@ -139,24 +135,25 @@ export class AttributesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  attributesComputedPost$Response(params: {
-    body: Attribute
-  }): Observable<StrictHttpResponse<Attribute>> {
-
+  attributesComputedPost$Response(params: { body: Attribute }): Observable<StrictHttpResponse<Attribute>> {
     const rb = new RequestBuilder(this.rootUrl, AttributesService.AttributesComputedPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Attribute>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Attribute>;
+        })
+      );
   }
 
   /**
@@ -169,10 +166,7 @@ export class AttributesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  attributesComputedPost(params: {
-    body: Attribute
-  }): Observable<Attribute> {
-
+  attributesComputedPost(params: { body: Attribute }): Observable<Attribute> {
     return this.attributesComputedPost$Response(params).pipe(
       map((r: StrictHttpResponse<Attribute>) => r.body as Attribute)
     );
@@ -193,26 +187,26 @@ export class AttributesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  attributesComputedIdPut$Response(params: {
-    id: number;
-    body: Attribute
-  }): Observable<StrictHttpResponse<Attribute>> {
-
+  attributesComputedIdPut$Response(params: { id: number; body: Attribute }): Observable<StrictHttpResponse<Attribute>> {
     const rb = new RequestBuilder(this.rootUrl, AttributesService.AttributesComputedIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Attribute>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Attribute>;
+        })
+      );
   }
 
   /**
@@ -225,11 +219,7 @@ export class AttributesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  attributesComputedIdPut(params: {
-    id: number;
-    body: Attribute
-  }): Observable<Attribute> {
-
+  attributesComputedIdPut(params: { id: number; body: Attribute }): Observable<Attribute> {
     return this.attributesComputedIdPut$Response(params).pipe(
       map((r: StrictHttpResponse<Attribute>) => r.body as Attribute)
     );
@@ -250,24 +240,25 @@ export class AttributesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  attributesComputedIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  attributesComputedIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, AttributesService.AttributesComputedIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -280,13 +271,7 @@ export class AttributesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  attributesComputedIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.attributesComputedIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  attributesComputedIdDelete(params: { id: number }): Observable<void> {
+    return this.attributesComputedIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

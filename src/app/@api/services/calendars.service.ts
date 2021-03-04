@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Calendar } from '../models/calendar';
 
-
 /**
  * Calendar management
  */
@@ -19,10 +18,7 @@ import { Calendar } from '../models/calendar';
   providedIn: 'root',
 })
 export class CalendarsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class CalendarsService extends BaseService {
    * This method doesn't expect any request body.
    */
   calendarsGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -53,22 +48,25 @@ export class CalendarsService extends BaseService {
      */
     userId?: number;
   }): Observable<StrictHttpResponse<Array<Calendar>>> {
-
     const rb = new RequestBuilder(this.rootUrl, CalendarsService.CalendarsGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
       rb.query('userId', params.userId, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Calendar>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Calendar>>;
+        })
+      );
   }
 
   /**
@@ -82,7 +80,6 @@ export class CalendarsService extends BaseService {
    * This method doesn't expect any request body.
    */
   calendarsGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -93,7 +90,6 @@ export class CalendarsService extends BaseService {
      */
     userId?: number;
   }): Observable<Array<Calendar>> {
-
     return this.calendarsGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Calendar>>) => r.body as Array<Calendar>)
     );
@@ -114,24 +110,25 @@ export class CalendarsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  calendarsPost$Response(params: {
-    body: Calendar
-  }): Observable<StrictHttpResponse<Calendar>> {
-
+  calendarsPost$Response(params: { body: Calendar }): Observable<StrictHttpResponse<Calendar>> {
     const rb = new RequestBuilder(this.rootUrl, CalendarsService.CalendarsPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Calendar>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Calendar>;
+        })
+      );
   }
 
   /**
@@ -144,13 +141,8 @@ export class CalendarsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  calendarsPost(params: {
-    body: Calendar
-  }): Observable<Calendar> {
-
-    return this.calendarsPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Calendar>) => r.body as Calendar)
-    );
+  calendarsPost(params: { body: Calendar }): Observable<Calendar> {
+    return this.calendarsPost$Response(params).pipe(map((r: StrictHttpResponse<Calendar>) => r.body as Calendar));
   }
 
   /**
@@ -168,26 +160,26 @@ export class CalendarsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  calendarsIdPut$Response(params: {
-    id: number;
-    body: Calendar
-  }): Observable<StrictHttpResponse<Calendar>> {
-
+  calendarsIdPut$Response(params: { id: number; body: Calendar }): Observable<StrictHttpResponse<Calendar>> {
     const rb = new RequestBuilder(this.rootUrl, CalendarsService.CalendarsIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Calendar>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Calendar>;
+        })
+      );
   }
 
   /**
@@ -200,14 +192,8 @@ export class CalendarsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  calendarsIdPut(params: {
-    id: number;
-    body: Calendar
-  }): Observable<Calendar> {
-
-    return this.calendarsIdPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Calendar>) => r.body as Calendar)
-    );
+  calendarsIdPut(params: { id: number; body: Calendar }): Observable<Calendar> {
+    return this.calendarsIdPut$Response(params).pipe(map((r: StrictHttpResponse<Calendar>) => r.body as Calendar));
   }
 
   /**
@@ -225,24 +211,25 @@ export class CalendarsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  calendarsIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  calendarsIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, CalendarsService.CalendarsIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -255,13 +242,7 @@ export class CalendarsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  calendarsIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.calendarsIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  calendarsIdDelete(params: { id: number }): Observable<void> {
+    return this.calendarsIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
-
 }

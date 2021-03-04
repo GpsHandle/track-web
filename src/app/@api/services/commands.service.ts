@@ -12,7 +12,6 @@ import { map, filter } from 'rxjs/operators';
 import { Command } from '../models/command';
 import { CommandType } from '../models/command-type';
 
-
 /**
  * Sending commands to devices and stored command management
  */
@@ -20,10 +19,7 @@ import { CommandType } from '../models/command-type';
   providedIn: 'root',
 })
 export class CommandsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -43,7 +39,6 @@ export class CommandsService extends BaseService {
    * This method doesn't expect any request body.
    */
   commandsGet$Response(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -65,7 +60,6 @@ export class CommandsService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<StrictHttpResponse<Array<Command>>> {
-
     const rb = new RequestBuilder(this.rootUrl, CommandsService.CommandsGetPath, 'get');
     if (params) {
       rb.query('all', params.all, {});
@@ -75,15 +69,19 @@ export class CommandsService extends BaseService {
       rb.query('refresh', params.refresh, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Command>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Command>>;
+        })
+      );
   }
 
   /**
@@ -97,7 +95,6 @@ export class CommandsService extends BaseService {
    * This method doesn't expect any request body.
    */
   commandsGet(params?: {
-
     /**
      * Can only be used by admins or managers to fetch all entities
      */
@@ -119,7 +116,6 @@ export class CommandsService extends BaseService {
     groupId?: number;
     refresh?: boolean;
   }): Observable<Array<Command>> {
-
     return this.commandsGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Command>>) => r.body as Array<Command>)
     );
@@ -140,24 +136,25 @@ export class CommandsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  commandsPost$Response(params: {
-    body: Command
-  }): Observable<StrictHttpResponse<Command>> {
-
+  commandsPost$Response(params: { body: Command }): Observable<StrictHttpResponse<Command>> {
     const rb = new RequestBuilder(this.rootUrl, CommandsService.CommandsPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Command>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Command>;
+        })
+      );
   }
 
   /**
@@ -170,13 +167,8 @@ export class CommandsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  commandsPost(params: {
-    body: Command
-  }): Observable<Command> {
-
-    return this.commandsPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Command>) => r.body as Command)
-    );
+  commandsPost(params: { body: Command }): Observable<Command> {
+    return this.commandsPost$Response(params).pipe(map((r: StrictHttpResponse<Command>) => r.body as Command));
   }
 
   /**
@@ -194,26 +186,26 @@ export class CommandsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  commandsIdPut$Response(params: {
-    id: number;
-    body: Command
-  }): Observable<StrictHttpResponse<Command>> {
-
+  commandsIdPut$Response(params: { id: number; body: Command }): Observable<StrictHttpResponse<Command>> {
     const rb = new RequestBuilder(this.rootUrl, CommandsService.CommandsIdPutPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Command>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Command>;
+        })
+      );
   }
 
   /**
@@ -226,14 +218,8 @@ export class CommandsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  commandsIdPut(params: {
-    id: number;
-    body: Command
-  }): Observable<Command> {
-
-    return this.commandsIdPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Command>) => r.body as Command)
-    );
+  commandsIdPut(params: { id: number; body: Command }): Observable<Command> {
+    return this.commandsIdPut$Response(params).pipe(map((r: StrictHttpResponse<Command>) => r.body as Command));
   }
 
   /**
@@ -251,24 +237,25 @@ export class CommandsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  commandsIdDelete$Response(params: {
-    id: number;
-  }): Observable<StrictHttpResponse<void>> {
-
+  commandsIdDelete$Response(params: { id: number }): Observable<StrictHttpResponse<void>> {
     const rb = new RequestBuilder(this.rootUrl, CommandsService.CommandsIdDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
   }
 
   /**
@@ -281,13 +268,8 @@ export class CommandsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  commandsIdDelete(params: {
-    id: number;
-  }): Observable<void> {
-
-    return this.commandsIdDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
+  commandsIdDelete(params: { id: number }): Observable<void> {
+    return this.commandsIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
 
   /**
@@ -306,27 +288,29 @@ export class CommandsService extends BaseService {
    * This method doesn't expect any request body.
    */
   commandsSendGet$Response(params?: {
-
     /**
      * Standard users can use this only with _deviceId_s, they have access to
      */
     deviceId?: number;
   }): Observable<StrictHttpResponse<Array<Command>>> {
-
     const rb = new RequestBuilder(this.rootUrl, CommandsService.CommandsSendGetPath, 'get');
     if (params) {
       rb.query('deviceId', params.deviceId, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Command>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Command>>;
+        })
+      );
   }
 
   /**
@@ -340,13 +324,11 @@ export class CommandsService extends BaseService {
    * This method doesn't expect any request body.
    */
   commandsSendGet(params?: {
-
     /**
      * Standard users can use this only with _deviceId_s, they have access to
      */
     deviceId?: number;
   }): Observable<Array<Command>> {
-
     return this.commandsSendGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Command>>) => r.body as Array<Command>)
     );
@@ -367,24 +349,25 @@ export class CommandsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  commandsSendPost$Response(params: {
-    body: Command
-  }): Observable<StrictHttpResponse<Command>> {
-
+  commandsSendPost$Response(params: { body: Command }): Observable<StrictHttpResponse<Command>> {
     const rb = new RequestBuilder(this.rootUrl, CommandsService.CommandsSendPostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Command>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Command>;
+        })
+      );
   }
 
   /**
@@ -397,13 +380,8 @@ export class CommandsService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  commandsSendPost(params: {
-    body: Command
-  }): Observable<Command> {
-
-    return this.commandsSendPost$Response(params).pipe(
-      map((r: StrictHttpResponse<Command>) => r.body as Command)
-    );
+  commandsSendPost(params: { body: Command }): Observable<Command> {
+    return this.commandsSendPost$Response(params).pipe(map((r: StrictHttpResponse<Command>) => r.body as Command));
   }
 
   /**
@@ -422,7 +400,6 @@ export class CommandsService extends BaseService {
    * This method doesn't expect any request body.
    */
   commandsTypesGet$Response(params?: {
-
     /**
      * Internal device identifier. Only works if device has already reported some locations
      */
@@ -438,7 +415,6 @@ export class CommandsService extends BaseService {
      */
     textChannel?: boolean;
   }): Observable<StrictHttpResponse<Array<CommandType>>> {
-
     const rb = new RequestBuilder(this.rootUrl, CommandsService.CommandsTypesGetPath, 'get');
     if (params) {
       rb.query('deviceId', params.deviceId, {});
@@ -446,15 +422,19 @@ export class CommandsService extends BaseService {
       rb.query('textChannel', params.textChannel, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<CommandType>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<CommandType>>;
+        })
+      );
   }
 
   /**
@@ -468,7 +448,6 @@ export class CommandsService extends BaseService {
    * This method doesn't expect any request body.
    */
   commandsTypesGet(params?: {
-
     /**
      * Internal device identifier. Only works if device has already reported some locations
      */
@@ -484,10 +463,8 @@ export class CommandsService extends BaseService {
      */
     textChannel?: boolean;
   }): Observable<Array<CommandType>> {
-
     return this.commandsTypesGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<CommandType>>) => r.body as Array<CommandType>)
     );
   }
-
 }

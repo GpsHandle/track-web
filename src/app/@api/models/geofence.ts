@@ -2,7 +2,7 @@
 /* eslint-disable */
 export interface Geofence {
   area?: string;
-  attributes?: {  };
+  attributes?: {};
   calendarId?: number;
   description?: string;
   id?: number;

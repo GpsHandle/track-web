@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Position } from '../models/position';
 
-
 /**
  * Retrieving raw location information
  */
@@ -19,10 +18,7 @@ import { Position } from '../models/position';
   providedIn: 'root',
 })
 export class PositionsService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
@@ -42,7 +38,6 @@ export class PositionsService extends BaseService {
    * This method doesn't expect any request body.
    */
   positionsGet$Json$Response(params?: {
-
     /**
      * _deviceId_ is optional, but requires the _from_ and _to_ parameters when used
      */
@@ -63,7 +58,6 @@ export class PositionsService extends BaseService {
      */
     id?: number;
   }): Observable<StrictHttpResponse<Array<Position>>> {
-
     const rb = new RequestBuilder(this.rootUrl, PositionsService.PositionsGetPath, 'get');
     if (params) {
       rb.query('deviceId', params.deviceId, {});
@@ -72,15 +66,19 @@ export class PositionsService extends BaseService {
       rb.query('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Position>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'json',
+          accept: 'application/json',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Position>>;
+        })
+      );
   }
 
   /**
@@ -94,7 +92,6 @@ export class PositionsService extends BaseService {
    * This method doesn't expect any request body.
    */
   positionsGet$Json(params?: {
-
     /**
      * _deviceId_ is optional, but requires the _from_ and _to_ parameters when used
      */
@@ -115,7 +112,6 @@ export class PositionsService extends BaseService {
      */
     id?: number;
   }): Observable<Array<Position>> {
-
     return this.positionsGet$Json$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)
     );
@@ -132,7 +128,6 @@ export class PositionsService extends BaseService {
    * This method doesn't expect any request body.
    */
   positionsGet$Csv$Response(params?: {
-
     /**
      * _deviceId_ is optional, but requires the _from_ and _to_ parameters when used
      */
@@ -153,7 +148,6 @@ export class PositionsService extends BaseService {
      */
     id?: number;
   }): Observable<StrictHttpResponse<Array<Position>>> {
-
     const rb = new RequestBuilder(this.rootUrl, PositionsService.PositionsGetPath, 'get');
     if (params) {
       rb.query('deviceId', params.deviceId, {});
@@ -162,15 +156,19 @@ export class PositionsService extends BaseService {
       rb.query('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: 'text/csv'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Position>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: 'text/csv',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Position>>;
+        })
+      );
   }
 
   /**
@@ -184,7 +182,6 @@ export class PositionsService extends BaseService {
    * This method doesn't expect any request body.
    */
   positionsGet$Csv(params?: {
-
     /**
      * _deviceId_ is optional, but requires the _from_ and _to_ parameters when used
      */
@@ -205,7 +202,6 @@ export class PositionsService extends BaseService {
      */
     id?: number;
   }): Observable<Array<Position>> {
-
     return this.positionsGet$Csv$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)
     );
@@ -222,7 +218,6 @@ export class PositionsService extends BaseService {
    * This method doesn't expect any request body.
    */
   positionsGet$Xml$Response(params?: {
-
     /**
      * _deviceId_ is optional, but requires the _from_ and _to_ parameters when used
      */
@@ -243,7 +238,6 @@ export class PositionsService extends BaseService {
      */
     id?: number;
   }): Observable<StrictHttpResponse<Array<Position>>> {
-
     const rb = new RequestBuilder(this.rootUrl, PositionsService.PositionsGetPath, 'get');
     if (params) {
       rb.query('deviceId', params.deviceId, {});
@@ -252,15 +246,19 @@ export class PositionsService extends BaseService {
       rb.query('id', params.id, {});
     }
 
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/gpx+xml'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Position>>;
-      })
-    );
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'application/gpx+xml',
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Array<Position>>;
+        })
+      );
   }
 
   /**
@@ -274,7 +272,6 @@ export class PositionsService extends BaseService {
    * This method doesn't expect any request body.
    */
   positionsGet$Xml(params?: {
-
     /**
      * _deviceId_ is optional, but requires the _from_ and _to_ parameters when used
      */
@@ -295,10 +292,8 @@ export class PositionsService extends BaseService {
      */
     id?: number;
   }): Observable<Array<Position>> {
-
     return this.positionsGet$Xml$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)
     );
   }
-
 }
