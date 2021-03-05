@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+
 import { AttributeSelectors } from './attribute-store';
 import { CalendarSelectors } from './calendar-store';
 import { CommandSelectors } from './command-store';
@@ -17,6 +18,8 @@ import { SessionSelectors } from './session-store';
 import { StatisticSelectors } from './statistic-store';
 import { UserSelectors } from './user-store';
 
+
+
 export const selectError = createSelector(
   AttributeSelectors.selectError,
   CalendarSelectors.selectError,
@@ -26,16 +29,6 @@ export const selectError = createSelector(
   EventSelectors.selectError,
   GeofenceSelectors.selectError,
   GroupSelectors.selectError,
-  // MaintenanceSelectors.selectError,
-  // NotificationSelectors.selectError,
-  // PermissionSelectors.selectError,
-  // PositionSelectors.selectError,
-  // ReportSelectors.selectError,
-  // ServerSelectors.selectError,
-  // SessionSelectors.selectError,
-  // StatisticSelectors.selectError,
-  // UserSelectors.selectError,
-
   (
     attributeError: string,
     calendarError: string,
@@ -44,20 +37,33 @@ export const selectError = createSelector(
     driverError: string,
     eventError: string,
     geofenceError: string
-    /*groupError: string,
-   maintenanceError: string,
-   notificationError: string,
-   permissionError: string,
-   positionError: string,
-   reportError: string,
-   serverError: string,
-   sessionError: string,
-   statisticError: string,
-   userError: string*/
   ) => {
-    return attributeError;
+    return attributeError || calendarError || commandError || deviceError || driverError || eventError || geofenceError;
   }
 );
+
+// MaintenanceSelectors.selectError,
+// NotificationSelectors.selectError,
+// PermissionSelectors.selectError,
+// PositionSelectors.selectError,
+// ReportSelectors.selectError,
+// ServerSelectors.selectError,
+// SessionSelectors.selectError,
+// StatisticSelectors.selectError,
+// UserSelectors.selectError,
+
+/*groupError: string,
+maintenanceError: string,
+notificationError: string,
+permissionError: string,
+positionError: string,
+reportError: string,
+serverError: string,
+sessionError: string,
+statisticError: string,
+userError: string*/
+
+
 
 export const selectLoading = createSelector(AttributeSelectors.selectLoading, (attributeLoading: boolean) => {
   return attributeLoading;
