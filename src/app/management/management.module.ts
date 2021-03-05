@@ -10,8 +10,6 @@ import { AuthModule } from '@app/auth';
 import { I18nModule } from '@app/i18n';
 import { RouterModule } from '@angular/router';
 
-
-
 @NgModule({
   declarations: [ManagementComponent],
   imports: [
@@ -23,7 +21,7 @@ import { RouterModule } from '@angular/router';
     I18nModule,
     RouterModule,
     SharedModule,
-    ManagementRoutingModule
-  ]
+    ManagementRoutingModule,
+  ],
 })
-export class ManagementModule { }
+export class ManagementModule {}

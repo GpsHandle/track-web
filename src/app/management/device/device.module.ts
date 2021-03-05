@@ -4,12 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DeviceRoutingModule } from './device-routing.module';
 import { DeviceComponent } from './device.component';
 
-
 @NgModule({
   declarations: [DeviceComponent],
-  imports: [
-    CommonModule,
-    DeviceRoutingModule
-  ]
+  imports: [CommonModule, DeviceRoutingModule],
 })
-export class DeviceModule { }
+export class DeviceModule {}

@@ -7,14 +7,12 @@ export const deviceAdapter: EntityAdapter<Device> = createEntityAdapter<Device>(
   sortComparer: (a: Device, b: Device): number => b.name.localeCompare(a.name),
 });
 
-export interface State extends EntityState<Device>{
+export interface State extends EntityState<Device> {
   loading?: boolean;
   error?: string;
 }
 
-export const initialState: State = deviceAdapter.getInitialState(
-  {
-    error: null,
-    loading: false,
-  }
-);
+export const initialState: State = deviceAdapter.getInitialState({
+  error: null,
+  loading: false,
+});

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
@@ -6,6 +6,7 @@ import { Logger } from '@core/logger.service';
 import enUS from '../../translations/en-US.json';
 import esES from '../../translations/es-ES.json';
 import zhCN from '../../translations/zh-CN.json';
+import { isPlatformBrowser } from '@angular/common';
 
 const log = new Logger('I18nService');
 const languageKey = 'language';
@@ -18,12 +19,15 @@ export class I18nService {
   supportedLanguages!: string[];
 
   private langChangeSubscription!: Subscription;
+  private _platformId: string;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              @Inject(PLATFORM_ID) platformId: string) {
     // Embed languages to avoid extra HTTP requests
     translateService.setTranslation('en-US', enUS);
     translateService.setTranslation('es-ES', esES);
     translateService.setTranslation('zh-CN', zhCN);
+    this._platformId = platformId;
   }
 
   /**
@@ -39,7 +43,7 @@ export class I18nService {
 
     // Warning: this subscription will always be alive for the app's lifetime
     this.langChangeSubscription = this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-      localStorage.setItem(languageKey, event.lang);
+      this.setItem(languageKey, event.lang);
     });
   }
 
@@ -59,7 +63,7 @@ export class I18nService {
    * @param language The IETF language code to set.
    */
   set language(language: string) {
-    language = language || localStorage.getItem(languageKey) || this.translateService.getBrowserCultureLang();
+    language = language || this.getItem(languageKey) || this.translateService.getBrowserCultureLang();
     let isSupportedLanguage = this.supportedLanguages.includes(language);
 
     // If no exact match is found, search without the region
@@ -84,5 +88,19 @@ export class I18nService {
    */
   get language(): string {
     return this.translateService.currentLang;
+  }
+
+  setItem(key: string, value: string) {
+    if (isPlatformBrowser(this._platformId)) {
+      localStorage.setItem(key, value);
+    }
+  }
+
+  getItem(key: string) {
+    if (isPlatformBrowser(this._platformId)) {
+      localStorage.getItem(key);
+    } else {
+      return key;
+    }
   }
 }

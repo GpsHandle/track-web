@@ -10,18 +10,18 @@ import { MaterialModule } from './material.module';
 import { environment } from '@env/environment';
 import { CoreModule } from '@core';
 import { SharedModule } from '@shared';
-import { AuthModule } from '@app/auth';
 import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RootStoreModule } from './@stores/root-store.module';
-import { ManagementModule } from '@app/management/management.module';
-import { ReportModule } from '@app/report/report.module';
+import { AuthModule } from './auth';
+import { ManagementModule } from './management/management.module';
+import { ReportModule } from './report/report.module';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
     HttpClientModule,

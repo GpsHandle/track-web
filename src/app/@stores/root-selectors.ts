@@ -18,8 +18,6 @@ import { SessionSelectors } from './session-store';
 import { StatisticSelectors } from './statistic-store';
 import { UserSelectors } from './user-store';
 
-
-
 export const selectError = createSelector(
   AttributeSelectors.selectError,
   CalendarSelectors.selectError,
@@ -62,8 +60,6 @@ serverError: string,
 sessionError: string,
 statisticError: string,
 userError: string*/
-
-
 
 export const selectLoading = createSelector(AttributeSelectors.selectLoading, (attributeLoading: boolean) => {
   return attributeLoading;

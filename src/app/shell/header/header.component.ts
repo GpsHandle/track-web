@@ -15,11 +15,7 @@ export class HeaderComponent implements OnInit {
 
   user$ = this.facade.authState$;
 
-  constructor(
-    private router: Router,
-    private titleService: Title,
-    private facade: RootFacade,
-  ) {}
+  constructor(private router: Router, private titleService: Title, private facade: RootFacade) {}
 
   ngOnInit() {}
 

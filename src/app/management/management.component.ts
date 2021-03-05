@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-management',
   templateUrl: './management.component.html',
-  styleUrls: ['./management.component.scss']
+  styleUrls: ['./management.component.scss'],
 })
 export class ManagementComponent implements OnInit {
-  constructor(private media: MediaObserver, private router: Router) { }
+  constructor(private media: MediaObserver, private router: Router) {}
 
   ngOnInit(): void {
     // Automatically close side menu on screens > sm breakpoint
@@ -26,14 +26,12 @@ export class ManagementComponent implements OnInit {
       )
       .subscribe(() => {
         if (this.isMobile) {
-          this.router.navigate(['/'])
+          this.router.navigate(['/']);
         }
       });
   }
 
-
   get isMobile(): boolean {
     return this.media.isActive('xs') || this.media.isActive('sm');
   }
-
 }

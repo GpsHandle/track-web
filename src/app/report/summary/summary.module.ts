@@ -4,12 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SummaryRoutingModule } from './summary-routing.module';
 import { SummaryComponent } from './summary.component';
 
-
 @NgModule({
   declarations: [SummaryComponent],
-  imports: [
-    CommonModule,
-    SummaryRoutingModule
-  ]
+  imports: [CommonModule, SummaryRoutingModule],
 })
-export class SummaryModule { }
+export class SummaryModule {}

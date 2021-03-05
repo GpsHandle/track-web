@@ -8,9 +8,8 @@ describe('StopsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StopsComponent ]
-    })
-    .compileComponents();
+      declarations: [StopsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

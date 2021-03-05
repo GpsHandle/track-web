@@ -1,33 +1,32 @@
 <mat-sidenav-container fxFill>
-    <mat-sidenav #sidenav mode="side" opened ngClass.gt-sm="has-border">
-        <nav>
-            <mat-list>
-                <a mat-list-item routerLink="user" routerLinkActive="active">
-                    <span translate>User Management</span>
-                </a>
-                <a mat-list-item routerLink="device" routerLinkActive="active">
-                    <span translate>Device Management</span>
-                </a>
-                <mat-divider></mat-divider>
-                <a mat-list-item routerLink="group" routerLinkActive="active">
-                    <span translate>Group Management</span>
-                </a>
-                <a mat-list-item routerLink="driver" routerLinkActive="active">
-                    <span translate>Driver Management</span>
-                </a>
-                <a mat-list-item routerLink="geofence" routerLinkActive="active">
-                    <span translate>Geofence Management</span>
-                </a>
-                <mat-divider></mat-divider>
-                <a mat-list-item routerLink="/about" routerLinkActive="active">
-                    <span translate>About</span>
-                </a>
-                <mat-divider></mat-divider>
-            </mat-list>
-        </nav>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+  <mat-sidenav #sidenav mode="side" opened ngClass.gt-sm="has-border">
+    <nav>
+      <mat-list>
+        <a mat-list-item routerLink="user" routerLinkActive="active">
+          <span translate>User Management</span>
+        </a>
+        <a mat-list-item routerLink="device" routerLinkActive="active">
+          <span translate>Device Management</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="group" routerLinkActive="active">
+          <span translate>Group Management</span>
+        </a>
+        <a mat-list-item routerLink="driver" routerLinkActive="active">
+          <span translate>Driver Management</span>
+        </a>
+        <a mat-list-item routerLink="geofence" routerLinkActive="active">
+          <span translate>Geofence Management</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="/about" routerLinkActive="active">
+          <span translate>About</span>
+        </a>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>
-

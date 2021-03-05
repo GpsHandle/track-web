@@ -6,17 +6,18 @@ import { ManagementComponent } from '@app/management/management.component';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { ReportComponent } from '@app/report/report.component';
 
-
 const routes: Routes = [
   Shell.childRoutes([
-    { path: 'report', component: ReportComponent,
+    {
+      path: 'report',
+      component: ReportComponent,
       children: [
-        { path: 'route', loadChildren: () => import('./route/route.module').then(m => m.RouteModule) },
-        { path: 'stops', loadChildren: () => import('./stops/stops.module').then(m => m.StopsModule) },
-        { path: 'summary', loadChildren: () => import('./summary/summary.module').then(m => m.SummaryModule) },
-        { path: 'trips', loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule) },
-      ]
-    }
+        { path: 'route', loadChildren: () => import('./route/route.module').then((m) => m.RouteModule) },
+        { path: 'stops', loadChildren: () => import('./stops/stops.module').then((m) => m.StopsModule) },
+        { path: 'summary', loadChildren: () => import('./summary/summary.module').then((m) => m.SummaryModule) },
+        { path: 'trips', loadChildren: () => import('./trips/trips.module').then((m) => m.TripsModule) },
+      ],
+    },
   ]),
 ];
 
@@ -25,4 +26,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [],
 })
-export class ReportRoutingModule { }
+export class ReportRoutingModule {}
