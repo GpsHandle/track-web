@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RootStoreModule } from './@stores/root-store.module';
 import { ManagementModule } from '@app/management/management.module';
+import { ReportModule } from '@app/report/report.module';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { ManagementModule } from '@app/management/management.module';
     ShellModule,
     HomeModule,
     ManagementModule,
+    ReportModule,
     AuthModule,
     AppRoutingModule,
     RootStoreModule,
