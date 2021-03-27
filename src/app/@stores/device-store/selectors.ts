@@ -1,13 +1,18 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { featureKey } from './reducer';
-import { deviceAdapter, State } from './state';
+import { __adapter__, State } from './state';
 
 export const __state__ = createFeatureSelector(featureKey);
 
-const getError = (state: State) => state.error;
-const getLoading = (state: State) => state.loading;
+// get the selectors
+const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal,
+} = __adapter__.getSelectors();
 
-export const selectError = createSelector(__state__, getError);
-export const selectLoading = createSelector(__state__, getLoading);
-
-export const selectAllDevices = deviceAdapter.getSelectors().selectAll;
+export const selectAllDevices = createSelector(__state__, selectAll);
+export const selectTotalDevices = createSelector(__state__, selectTotal);
+export const selectDevices = createSelector(__state__, selectEntities);
+export const selectDeviceIds = createSelector(__state__, selectIds);

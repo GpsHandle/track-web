@@ -13,7 +13,7 @@ export const featureKey = 'auth';
 
 export const authReducer = createReducer(
   initialState,
-  on(loginRequestAction, (state, action) => ({ ...state, error: null, loading: true, user: null })),
+  on(loginRequestAction, (state, action) => ({ ...state, error: null, loading: true, user: null, userModel: action.userModel})),
   on(loginSuccessAction, (state, action) => ({ ...state, error: null, loading: false, user: action.user })),
   on(loginFailureAction, (state, action) => ({ ...state, error: action.error, loading: false, user: null })),
 

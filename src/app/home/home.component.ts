@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
+import { RootFacade } from '@app/@stores/root.facade';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,11 @@ export class HomeComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
 
-  constructor(private quoteService: QuoteService) {}
+  constructor(private facade: RootFacade, private quoteService: QuoteService) {}
 
   ngOnInit() {
+    this.facade.loadAllDevice();
+
     this.isLoading = true;
     this.quoteService
       .getRandomQuote({ category: 'dev' })

@@ -19,7 +19,7 @@ export class Effects {
     this.actions$.pipe(
       ofType(loginRequestAction),
       switchMap((action) => {
-        return this.sessionService.sessionPost({ body: { email: action.email, password: action.password } }).pipe(
+        return this.sessionService.sessionPost({ body: { email: action.userModel.username, password: action.userModel.password } }).pipe(
           map((data: User) => {
             return loginSuccessAction({ user: data });
           }),

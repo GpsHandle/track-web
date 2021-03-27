@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '@env/environment';
 import { Logger, UntilDestroy, untilDestroyed } from '@core';
 import { RootFacade } from '@app/@stores/root.facade';
+import { LoginModel } from '@app/auth/login.model';
 
 const log = new Logger('Login');
 
@@ -32,8 +33,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   login() {
-    const userModel: { username: string; password: string; remember: boolean } = this.loginForm.value;
-    this.facade.loginRequest(userModel.username, userModel.password, userModel.remember);
+    const userModel: LoginModel = this.loginForm.value;
+    this.facade.loginRequest(userModel);
     // this.isLoading = true;
   }
 
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      remember: true,
+      rememberMe: true,
     });
   }
 }
