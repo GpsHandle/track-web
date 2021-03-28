@@ -1,6 +1,13 @@
 .container {
+  height: 100%;
   text-align: center;
-  padding: 1em;
+  padding: 0;
+  overflow: hidden;
+
+  mgl-map {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .logo {
@@ -11,4 +18,10 @@
 q {
   font-style: italic;
   quotes: "« " " »";
+}
+
+.arrow {
+  width: 500px;
+  height: 500px;
+  // transform: rotate(-97deg);
 }

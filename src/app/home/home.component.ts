@@ -3,7 +3,9 @@ import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
 import { RootFacade } from '@app/@stores/root.facade';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,6 +14,9 @@ import { RootFacade } from '@app/@stores/root.facade';
 export class HomeComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
+  deviceList$ = this.facade.deviceList$;
+  pitch = 50;
+  bearing = -97;
 
   constructor(private facade: RootFacade, private quoteService: QuoteService) {}
 
@@ -29,5 +34,23 @@ export class HomeComponent implements OnInit {
       .subscribe((quote: string) => {
         this.quote = quote;
       });
+
+    // let angle = 0;
+    // setInterval(() => {
+    //   angle += 0.01;
+    //   if (angle === 1) {
+    //     angle = 0;
+    //   }
+    //   this.pitch = 45 + 15 * Math.cos(angle);
+    //   this.bearing = -103 + 20 * Math.sin(angle);
+    // }, 20);
   }
+
+  loaded($event: mapboxgl.Map) {}
+
+  mouseOver($event: mapboxgl.MapMouseEvent & mapboxgl.EventData) {}
+
+  zoomCheck($event: mapboxgl.MapboxEvent<MouseEvent | TouchEvent | WheelEvent | undefined> & mapboxgl.EventData) {}
+
+  alert(foo: string) {}
 }

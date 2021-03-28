@@ -8,9 +8,11 @@ export const __adapter__: EntityAdapter<Device> = createEntityAdapter<Device>({
 });
 
 export interface State extends EntityState<Device> {
-  selDeviceId: number | null
+  selDeviceId: number | undefined;
+  positionIds: number[] | null;
 }
 
 export const initialState = __adapter__.getInitialState({
-  selDeviceId: null
+  selDeviceId: null,
+  positionIds: null,
 });

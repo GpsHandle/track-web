@@ -1,11 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { featureKey } from './reducer';
-import { State } from './state';
+import { __adapter__ } from '@app/@stores/position-store/state';
 
 export const __state__ = createFeatureSelector(featureKey);
 
-const getError = (state: State) => state.error;
-const getLoading = (state: State) => state.loading;
+// get the selectors
+const { selectIds, selectEntities, selectAll, selectTotal } = __adapter__.getSelectors();
 
-export const selectError = createSelector(__state__, getError);
-export const selectLoading = createSelector(__state__, getLoading);
+export const selectAllPosition = createSelector(__state__, selectAll);
+export const selectTotalPositions = createSelector(__state__, selectTotal);
+export const selectPositions = createSelector(__state__, selectEntities);
+export const selectPositionIds = createSelector(__state__, selectIds);

@@ -57,6 +57,9 @@ export class PositionsService extends BaseService {
      * To fetch one or more positions. Multiple params can be passed like &#x60;id&#x3D;31&amp;id&#x3D;42&#x60;
      */
     id?: number;
+
+    /**/
+    ids?: number[];
   }): Observable<StrictHttpResponse<Array<Position>>> {
     const rb = new RequestBuilder(this.rootUrl, PositionsService.PositionsGetPath, 'get');
     if (params) {
@@ -64,6 +67,13 @@ export class PositionsService extends BaseService {
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
       rb.query('id', params.id, {});
+
+      const ids = params.ids;
+      if (ids.length > 0) {
+        for (let x = 0; x < ids.length; x++) {
+          rb.query('id', ids[x], {});
+        }
+      }
     }
 
     return this.http
@@ -111,6 +121,8 @@ export class PositionsService extends BaseService {
      * To fetch one or more positions. Multiple params can be passed like &#x60;id&#x3D;31&amp;id&#x3D;42&#x60;
      */
     id?: number;
+
+    ids?: number[];
   }): Observable<Array<Position>> {
     return this.positionsGet$Json$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)
@@ -147,6 +159,8 @@ export class PositionsService extends BaseService {
      * To fetch one or more positions. Multiple params can be passed like &#x60;id&#x3D;31&amp;id&#x3D;42&#x60;
      */
     id?: number;
+
+    ids?: number[];
   }): Observable<StrictHttpResponse<Array<Position>>> {
     const rb = new RequestBuilder(this.rootUrl, PositionsService.PositionsGetPath, 'get');
     if (params) {
@@ -154,6 +168,13 @@ export class PositionsService extends BaseService {
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
       rb.query('id', params.id, {});
+
+      const ids = params.ids;
+      if (ids.length > 0) {
+        for (let x = 0; x < ids.length; x++) {
+          rb.query('id', ids[x], {});
+        }
+      }
     }
 
     return this.http
@@ -201,6 +222,8 @@ export class PositionsService extends BaseService {
      * To fetch one or more positions. Multiple params can be passed like &#x60;id&#x3D;31&amp;id&#x3D;42&#x60;
      */
     id?: number;
+
+    ids?: number[];
   }): Observable<Array<Position>> {
     return this.positionsGet$Csv$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)
@@ -237,6 +260,9 @@ export class PositionsService extends BaseService {
      * To fetch one or more positions. Multiple params can be passed like &#x60;id&#x3D;31&amp;id&#x3D;42&#x60;
      */
     id?: number;
+
+    /**/
+    ids?: number[];
   }): Observable<StrictHttpResponse<Array<Position>>> {
     const rb = new RequestBuilder(this.rootUrl, PositionsService.PositionsGetPath, 'get');
     if (params) {
@@ -244,6 +270,12 @@ export class PositionsService extends BaseService {
       rb.query('from', params.from, {});
       rb.query('to', params.to, {});
       rb.query('id', params.id, {});
+      const ids = params.ids;
+      if (ids.length > 0) {
+        for (let x = 0; x < ids.length; x++) {
+          rb.query('id', ids[x], {});
+        }
+      }
     }
 
     return this.http
@@ -291,6 +323,9 @@ export class PositionsService extends BaseService {
      * To fetch one or more positions. Multiple params can be passed like &#x60;id&#x3D;31&amp;id&#x3D;42&#x60;
      */
     id?: number;
+
+    /**/
+    ids?: number[];
   }): Observable<Array<Position>> {
     return this.positionsGet$Xml$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Position>>) => r.body as Array<Position>)

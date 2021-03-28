@@ -1,14 +1,54 @@
-<div class="container">
-  <mat-card>
-    <p>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />
-    </p>
-    <mat-card-content>
-      <mat-card-title translate>Hello world !</mat-card-title>
-      <mat-card-subtitle>
-        <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
-        <q [hidden]="isLoading">{{ quote }}</q>
-      </mat-card-subtitle>
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-sidenav-container fxFill>
+  <mat-sidenav #sidenav mode="side" opened="true" ngClass.gt-sm="has-border">
+    <nav>
+      <mat-list>
+        <a mat-list-item *ngFor="let device of deviceList$ | async; index as idx">
+          <span translate>{{ device.name }}</span>
+          <span translate>{{ device.status }}</span>
+          <div translate>{{ device.lastUpdate }}</div>
+          <div translate>{{ device.model }}</div>
+          <div translate>{{ device.positionId }}</div>
+        </a>
+      </mat-list>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <mgl-map
+        [style]="'mapbox://styles/vubakninh/ckmgoxkgn25xs17n01bu29krv'"
+        [zoom]="[3]"
+        [center]="[-74.5, 40]"
+        [attributionControl]="false"
+        (mapLoad)="loaded($event)"
+        (mouseOver)="mouseOver($event)"
+        (zoomEnd)="zoomCheck($event)"
+      >
+        <mgl-marker [lngLat]="[4.577979, 51.03816]" rotationAlignment="map" pitchAlignment="map">
+          <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 434 437">
+              <polygon points="37.5 437.18 218 350.75 217.49 -0.37 37.5 437.18" style="fill: #579120" />
+              <polygon points="397.55 437.13 218 350.75 217.49 -0.37 397.55 437.13" style="fill: #6fad2d" />
+              <polygon
+                points="217.22 391.46 397.55 437.13 218 350.75 37.5 437.18 217.22 391.46"
+                style="fill: #315112"
+              />
+            </svg>
+          </div>
+        </mgl-marker>
+      </mgl-map>
+
+      <!--      <mat-card>-->
+      <!--        <p>-->
+      <!--          <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />-->
+      <!--        </p>-->
+      <!--        <mat-card-content>-->
+      <!--          <mat-card-title translate>Hello world !</mat-card-title>-->
+      <!--          <mat-card-subtitle>-->
+      <!--            <app-loader [isLoading]="isLoading" size="1.5"></app-loader>-->
+      <!--            <q [hidden]="isLoading">{{ quote }}</q>-->
+      <!--          </mat-card-subtitle>-->
+      <!--        </mat-card-content>-->
+      <!--      </mat-card>-->
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

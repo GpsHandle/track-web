@@ -10,9 +10,9 @@ export enum ActionTypes {
   LOAD_ALL_DEVICE_SUCCESS = '[Device] Load All Device Success',
   LOAD_ALL_DEVICE_FAILURE = '[Device] Load All Device Failure',
 
-  LOAD_ONE_DEVICE_REQUEST = '[Device] Load One Device Request',
-  LOAD_ONE_DEVICE_SUCCESS = '[Device] Load One Device Success',
-  LOAD_ONE_DEVICE_FAILURE = '[Device] Load One Device Failure',
+  LOAD_DEVICE_BY_ID_REQUEST = '[Device] Load Device By Id Request',
+  LOAD_DEVICE_BY_ID_SUCCESS = '[Device] Load Device By Id Success',
+  LOAD_DEVICE_BY_ID_FAILURE = '[Device] Load Device By Id Failure',
 
   UPDATE_ONE_DEVICE_REQUEST = '[Device] Update One Device Request',
   UPDATE_ONE_DEVICE_SUCCESS = '[Device] Update One Device Success',
@@ -43,12 +43,12 @@ export const loadAllDeviceSuccessAction = createAction(
 );
 export const loadAllDeviceFailureAction = createAction(ActionTypes.LOAD_ALL_DEVICE_FAILURE, props<{ error: string }>());
 
-export const loadOneDeviceRequestAction = createAction(
-  ActionTypes.LOAD_ONE_DEVICE_REQUEST,
-  props<{ id: string | number }>()
+export const loadDeviceRequestAction = createAction(
+  ActionTypes.LOAD_DEVICE_BY_ID_REQUEST,
+  props<{ id?: number; uniqueId?: string }>()
 );
-export const loadOneDeviceSuccessAction = createAction(ActionTypes.LOAD_ONE_DEVICE_SUCCESS, props<{ item: Device }>());
-export const loadOneDeviceFailureAction = createAction(ActionTypes.LOAD_ONE_DEVICE_FAILURE, props<{ error: string }>());
+export const loadDeviceSuccessAction = createAction(ActionTypes.LOAD_DEVICE_BY_ID_SUCCESS, props<{ item: Device }>());
+export const loadDeviceFailureAction = createAction(ActionTypes.LOAD_DEVICE_BY_ID_FAILURE, props<{ error: string }>());
 
 export const updateOneDeviceRequestAction = createAction(
   ActionTypes.UPDATE_ONE_DEVICE_REQUEST,

@@ -12,10 +12,7 @@ export enum ActionTypes {
   LOGOUT_FAILURE = '[Auth] Logout Failure',
 }
 
-export const loginRequestAction = createAction(
-  ActionTypes.LOGIN_REQUEST,
-  props<{ userModel: LoginModel }>()
-);
+export const loginRequestAction = createAction(ActionTypes.LOGIN_REQUEST, props<{ userModel: LoginModel }>());
 export const loginSuccessAction = createAction(ActionTypes.LOGIN_SUCCESS, props<{ user: User }>());
 export const loginFailureAction = createAction(ActionTypes.LOGIN_FAILURE, props<{ error: string }>());
 

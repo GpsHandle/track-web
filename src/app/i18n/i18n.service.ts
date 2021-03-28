@@ -21,8 +21,7 @@ export class I18nService {
   private langChangeSubscription!: Subscription;
   private _platformId: string;
 
-  constructor(private translateService: TranslateService,
-              @Inject(PLATFORM_ID) platformId: string) {
+  constructor(private translateService: TranslateService, @Inject(PLATFORM_ID) platformId: string) {
     // Embed languages to avoid extra HTTP requests
     translateService.setTranslation('en-US', enUS);
     translateService.setTranslation('es-ES', esES);

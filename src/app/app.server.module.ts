@@ -10,4 +10,3 @@ import { FlexLayoutServerModule } from '@angular/flex-layout/server';
   bootstrap: [AppComponent],
 })
 export class AppServerModule {}
-

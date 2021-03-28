@@ -1,10 +1,21 @@
-import { Action, createReducer } from '@ngrx/store';
-import { initialState, State } from './state';
+import { Action, createReducer, on } from '@ngrx/store';
+import { __adapter__, initialState, State } from './state';
+import {
+  loadPositionFailureAction,
+  loadPositionRequestAction,
+  loadPositionSuccessAction,
+} from '@app/@stores/position-store/actions';
 
 export const featureKey = 'position';
 
 export const featureReducer = createReducer(
-  initialState
+  initialState,
+  on(loadPositionSuccessAction, (state, action) => {
+    return __adapter__.setAll(action.items, state);
+  }),
+  on(loadPositionFailureAction, (state, action) => {
+    return __adapter__.removeAll(state);
+  })
   // ...
 );
 

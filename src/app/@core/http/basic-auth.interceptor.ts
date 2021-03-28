@@ -10,8 +10,7 @@ import { UtilsService } from '@core/utils.service';
 })
 export class BasicAuthInterceptor implements HttpInterceptor {
   userModel$ = this.facade.userModel$;
-  constructor(private facade: RootFacade, private utilsService: UtilsService) {
-  }
+  constructor(private facade: RootFacade, private utilsService: UtilsService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // 1. check not need auth URL
@@ -26,11 +25,11 @@ export class BasicAuthInterceptor implements HttpInterceptor {
         req = req.clone({
           setHeaders: {
             // Authorization: 'Basic YWRtaW46YWRtaW4='
-            Authorization: `Basic ${auth_data}`
-          }
+            Authorization: `Basic ${auth_data}`,
+          },
         });
         return next.handle(req);
       })
-    )
+    );
   }
 }

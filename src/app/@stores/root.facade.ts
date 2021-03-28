@@ -4,20 +4,20 @@ import { AuthActions, AuthSelectors } from '@app/@stores/auth-store';
 import { DeviceActions, DeviceSelectors } from './device-store';
 import { LoginModel } from '@app/auth/login.model';
 
-
-
 @Injectable({
   providedIn: 'root',
 })
 export class RootFacade {
   userModel$ = this.store.select(AuthSelectors.selectUserModel);
   authState$ = this.store.select(AuthSelectors.selectUser);
+
+  deviceList$ = this.store.select(DeviceSelectors.selectAllDevices);
+  positionIds$ = this.store.select(DeviceSelectors.selectPositionIds);
+
   constructor(private store: Store<{}>) {}
 
   loginRequest(model: LoginModel) {
-    return this.store.dispatch(
-      AuthActions.loginRequestAction({userModel: model})
-    );
+    return this.store.dispatch(AuthActions.loginRequestAction({ userModel: model }));
   }
 
   logout() {
