@@ -4,6 +4,8 @@ import { finalize } from 'rxjs/operators';
 import { QuoteService } from './quote.service';
 import { RootFacade } from '@app/@stores/root.facade';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { MediaObserver } from '@angular/flex-layout';
+import { Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -18,23 +20,19 @@ export class HomeComponent implements OnInit {
   pitch = 50;
   bearing = -97;
 
-  constructor(private facade: RootFacade, private quoteService: QuoteService) {}
+  constructor(private facade: RootFacade, private media: MediaObserver, private router: Router) {}
 
   ngOnInit() {
+    this.media
+      .asObservable().subscribe(() => {
+      if (this.isMobile) {
+        this.router.navigate(['/m-live']);
+      }
+    });
+
     this.facade.loadAllDevice();
 
     this.isLoading = true;
-    this.quoteService
-      .getRandomQuote({ category: 'dev' })
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe((quote: string) => {
-        this.quote = quote;
-      });
-
     // let angle = 0;
     // setInterval(() => {
     //   angle += 0.01;
@@ -53,4 +51,8 @@ export class HomeComponent implements OnInit {
   zoomCheck($event: mapboxgl.MapboxEvent<MouseEvent | TouchEvent | WheelEvent | undefined> & mapboxgl.EventData) {}
 
   alert(foo: string) {}
+  get isMobile(): boolean {
+    return this.media.isActive('xs') || this.media.isActive('sm');
+  }
+
 }

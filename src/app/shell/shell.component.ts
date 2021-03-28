@@ -4,6 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { filter } from 'rxjs/operators';
 
 import { UntilDestroy, untilDestroyed } from '@core';
+import { Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +15,7 @@ import { UntilDestroy, untilDestroyed } from '@core';
 export class ShellComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
-  constructor(private media: MediaObserver) {}
+  constructor(private media: MediaObserver, private router: Router) {}
 
   ngOnInit() {
     // Automatically close side menu on screens > sm breakpoint
@@ -26,6 +27,10 @@ export class ShellComponent implements OnInit {
         ),
         untilDestroyed(this)
       )
-      .subscribe(() => this.sidenav.close());
+      .subscribe(() => {
+        this.sidenav.close();
+      });
   }
+
+
 }
