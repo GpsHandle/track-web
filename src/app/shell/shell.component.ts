@@ -31,6 +31,4 @@ export class ShellComponent implements OnInit {
         this.sidenav.close();
       });
   }
-
-
 }

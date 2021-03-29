@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { environment } from '@env/environment';
+import { RootFacade } from '@app/@stores/root.facade';
 
 @Component({
   selector: 'app-about',
@@ -9,8 +10,11 @@ import { environment } from '@env/environment';
 })
 export class AboutComponent implements OnInit {
   version: string | null = environment.version;
+  statistics$ = this.facade.serverStatistics$;
 
-  constructor() {}
+  constructor(private facade: RootFacade) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.facade.loadServerStatistics();
+  }
 }

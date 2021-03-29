@@ -6,11 +6,9 @@ import {
   createOneDeviceSuccessAction,
   loadAllDeviceFailureAction,
   loadAllDeviceRequestAction,
-  loadAllDeviceSuccessAction,
+  loadAllDeviceSuccessAction, selectDeviceAction
 } from '@app/@stores/device-store/actions';
 import { map } from 'lodash-es';
-
-
 
 export const featureKey = 'device';
 
@@ -25,6 +23,9 @@ export const featureReducer = createReducer(
   }),
   on(loadAllDeviceFailureAction, (state, action) => {
     return __adapter__.removeAll({ ...state, positionIds: null });
+  }),
+  on(selectDeviceAction, (state, action) => {
+    return ({...state, selDeviceId: action.id});
   })
 );
 

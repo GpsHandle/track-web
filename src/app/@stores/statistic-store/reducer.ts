@@ -1,10 +1,18 @@
-import { Action, createReducer } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { initialState, State } from './state';
+import {
+  loadServerStatisticsFailureAction,
+  loadServerStatisticsRequestAction,
+  loadServerStatisticsSuccessAction
+} from '@app/@stores/statistic-store/actions';
 
 export const featureKey = 'statistic';
 
 export const featureReducer = createReducer(
-  initialState
+  initialState,
+  on(loadServerStatisticsRequestAction, (state, action) => ({...state, loading: true, error: null, statistics: null})),
+  on(loadServerStatisticsSuccessAction, (state, action) => ({...state, loading: false, error: null, statistics: action.item})),
+  on(loadServerStatisticsFailureAction, (state, action) => ({...state, loading: false, error: action.error, statistics: null})),
   // ...
 );
 

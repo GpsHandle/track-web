@@ -6,6 +6,34 @@
     <mat-card-content>
       <mat-icon>code</mat-icon>
       <span translate>Version</span> {{ version }}
+
+      <table>
+        <tr>
+          <td translate>Active Devices:</td>
+          <td><span>{{(statistics$ | async).activeDevices}}</span></td>
+        </tr>
+        <tr>
+          <td translate>Active Users:</td>
+          <td><span>{{(statistics$ | async).activeUsers}}</span></td>
+        </tr>
+        <tr>
+          <td translate>Messages Received:</td>
+          <td><span>{{(statistics$ | async).messagesReceived}}</span></td>
+        </tr>
+        <tr>
+          <td translate>Messages Stored:</td>
+          <td><span>{{(statistics$ | async).messagesStored}}</span></td>
+        </tr>
+        <tr>
+          <td translate>Mail Sent:</td>
+          <td><span>{{(statistics$ | async).mailSent}}</span></td>
+        </tr>
+        <tr>
+          <td translate>SMS Sent:</td>
+          <td><span>{{(statistics$ | async).smsSent}}</span></td>
+        </tr>
+
+      </table>
     </mat-card-content>
   </mat-card>
 </div>

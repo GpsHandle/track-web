@@ -21,6 +21,8 @@ export enum ActionTypes {
   DELETE_ONE_DEVICE_REQUEST = '[Device] Delete One Device Request',
   DELETE_ONE_DEVICE_SUCCESS = '[Device] Delete One Device Success',
   DELETE_ONE_DEVICE_FAILURE = '[Device] Delete One Device Failure',
+
+  SELECT_DEVICE = '[Device] Select Device'
 }
 
 export const createOneDeviceRequestAction = createAction(
@@ -72,3 +74,5 @@ export const deleteOneDeviceFailureAction = createAction(
   ActionTypes.DELETE_ONE_DEVICE_FAILURE,
   props<{ error: string }>()
 );
+
+export const selectDeviceAction = createAction(ActionTypes.SELECT_DEVICE, props<{id: number}>());

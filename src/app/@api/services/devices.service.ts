@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { Device } from '../models/device';
 import { DeviceAccumulators } from '../models/device-accumulators';
+import moment from 'moment';
 
 /**
  * Device management
@@ -76,9 +77,8 @@ export class DevicesService extends BaseService {
       )
       .pipe(
         filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<Array<Device>>;
-        })
+        // map((r: HttpResponse<any>) => this.convertDateArrayFromServer(r as StrictHttpResponse<Array<Device>>))
+        map((r: HttpResponse<any>) => r as StrictHttpResponse<Array<Device>>)
       );
   }
 
@@ -321,5 +321,14 @@ export class DevicesService extends BaseService {
    */
   devicesIdAccumulatorsPut(params: { id: number; body: DeviceAccumulators }): Observable<void> {
     return this.devicesIdAccumulatorsPut$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
+  }
+
+  private convertDateArrayFromServer(response: StrictHttpResponse<Array<Device>>) {
+    if (response.body) {
+      response.body.forEach((dev: Device) => {
+        dev.lastUpdate = dev.lastUpdate ? moment(dev.lastUpdate) : undefined;
+      })
+    }
+    return response;
   }
 }

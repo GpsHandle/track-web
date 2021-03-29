@@ -6,6 +6,8 @@ export const __state__ = createFeatureSelector(featureKey);
 
 const getError = (state: State) => state.error;
 const getLoading = (state: State) => state.loading;
+const getStatistics = (state: State) => state.statistics;
 
 export const selectError = createSelector(__state__, getError);
 export const selectLoading = createSelector(__state__, getLoading);
+export const selectStatistics = createSelector(__state__, getStatistics);

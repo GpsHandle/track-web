@@ -1,5 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
+import { Position } from '@app/@api/models';
+import { Moment } from 'moment';
+
 export interface Device {
   attributes?: {};
   category?: string;
@@ -16,7 +19,8 @@ export interface Device {
   model?: string;
   name?: string;
   phone?: string;
-  positionId?: number;
   status?: string;
   uniqueId?: string;
+  positionId?: number;
+  position?: Position;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RootFacade } from '@app/@stores/root.facade';
 
 @Component({
   selector: 'app-device',
@@ -6,7 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./device.component.scss'],
 })
 export class DeviceComponent implements OnInit {
-  constructor() {}
+  deviceList$ = this.facade.deviceList$;
+  displayedColumns = [
+    'id',
+    'groupId',
+    'uniqueId',
+    'name',
+    'model',
+    'phone',
+    'status',
+    'positionId',
+    'lastUpdate',
+    'disabled',
+    'geofenceIds',
+    'category',
+    'attributes',
+    'contact',
+    'actions',
+  ];
 
-  ngOnInit(): void {}
+  constructor(private facade: RootFacade) {}
+
+  ngOnInit(): void {
+    this.facade.loadAllDevice();
+  }
 }

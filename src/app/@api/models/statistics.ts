@@ -11,4 +11,6 @@ export interface Statistics {
   messagesReceived?: number;
   messagesStored?: number;
   requests?: number;
+  mailSent?: number;
+  smsSent?: number;
 }
