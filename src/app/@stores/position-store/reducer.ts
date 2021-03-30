@@ -3,7 +3,7 @@ import { __adapter__, initialState, State } from './state';
 import {
   loadPositionFailureAction,
   loadPositionRequestAction,
-  loadPositionSuccessAction,
+  loadPositionSuccessAction, selectPositionAction
 } from '@app/@stores/position-store/actions';
 
 export const featureKey = 'position';
@@ -15,7 +15,8 @@ export const featureReducer = createReducer(
   }),
   on(loadPositionFailureAction, (state, action) => {
     return __adapter__.removeAll(state);
-  })
+  }),
+  on(selectPositionAction, (state, action) => ({...state, selPositionId: action.id}))
   // ...
 );
 

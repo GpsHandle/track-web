@@ -111,6 +111,6 @@ export class HomeComponent implements OnInit {
   }
 
   select($event: MouseEvent, device: Device) {
-
+    this.facade.selectDevice(device.id, device.positionId);
   }
 }

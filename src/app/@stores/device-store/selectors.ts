@@ -14,4 +14,8 @@ export const selectDevices = createSelector(__state__, selectEntities);
 export const selectDeviceIds = createSelector(__state__, selectIds);
 export const selectPositionIds = createSelector(__state__, getSelectPositionIds);
 export const selectSelDeviceId = createSelector(__state__, getSelectDeviceId);
-export const selectSelDevice = createSelector(selectDevices, selectSelDeviceId, (deviceMap, deviceId) => deviceMap[deviceId]);
+export const selectSelDevice = createSelector(
+  selectDevices,
+  selectSelDeviceId,
+  (deviceMap, deviceId) => deviceMap[deviceId]
+);

@@ -323,12 +323,12 @@ export class DevicesService extends BaseService {
     return this.devicesIdAccumulatorsPut$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
 
-  private convertDateArrayFromServer(response: StrictHttpResponse<Array<Device>>) {
-    if (response.body) {
-      response.body.forEach((dev: Device) => {
-        dev.lastUpdate = dev.lastUpdate ? moment(dev.lastUpdate) : undefined;
-      })
-    }
-    return response;
-  }
+  // private convertDateArrayFromServer(response: StrictHttpResponse<Array<Device>>) {
+  //   if (response.body) {
+  //     response.body.forEach((dev: Device) => {
+  //       dev.lastUpdate = dev.lastUpdate ? moment(dev.lastUpdate) : undefined;
+  //     })
+  //   }
+  //   return response;
+  // }
 }
