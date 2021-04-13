@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { featureKey } from './reducer';
 import { __adapter__, State } from './state';
-import * as _ from 'lodash';
+
 export const __state__ = createFeatureSelector(featureKey);
 export const getSelectPositionIds = (state: State) => state.positionIds;
 export const getSelectDeviceId = (state: State) => state.selDeviceId;
